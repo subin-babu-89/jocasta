@@ -3,11 +3,13 @@ package com.example.jocasta.repository
 import androidx.paging.*
 import com.example.jocasta.db.JocastaDatabase
 import com.example.jocasta.network.SWApiService
-import com.example.jocasta.network.model.AbstractResource
-import com.example.jocasta.network.model.People
-import com.example.jocasta.network.model.Planet
+import com.example.jocasta.network.model.*
 import com.example.jocasta.repository.mediator.*
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.withContext
+import timber.log.Timber
+import java.lang.Exception
 
 @Suppress("UNCHECKED_CAST")
 class ResourceRepository (private val service : SWApiService, private val database: JocastaDatabase) {
@@ -84,5 +86,41 @@ class ResourceRepository (private val service : SWApiService, private val databa
                 PeopleRemoteMediator(query, service, database) as RemoteMediator<Int, AbstractResource>
             }
         }
+    }
+
+    suspend fun getFilmFor(filmUrl : String) : Film{
+        if(database.filmDao().filmByURL(filmUrl).isNullOrEmpty()){
+            val id = filmUrl.split("/")[5]
+            val film = service.getFilmForId(id)
+            database.filmDao().insert(film)
+        }
+        return database.filmDao().filmByURL(filmUrl)[0]
+    }
+
+    suspend fun getSpeciesFor(speciesUrl : String) : Species{
+        if(database.speciesDao().elementByURl(speciesUrl).isNullOrEmpty()){
+            val id = speciesUrl.split("/")[5]
+            val species = service.getSpeciesForId(id)
+            database.speciesDao().insert(species)
+        }
+        return database.speciesDao().elementByURl(speciesUrl)[0]
+    }
+
+    suspend fun getVehicleFor(vehicleUrl : String) : Vehicle{
+        if(database.vehicleDao().elementByURl(vehicleUrl).isNullOrEmpty()){
+            val id = vehicleUrl.split("/")[5]
+            val vehicle = service.getVehiclesForId(id)
+            database.vehicleDao().insert(vehicle)
+        }
+        return database.vehicleDao().elementByURl(vehicleUrl)[0]
+    }
+
+    suspend fun getStarshipFor(starshipUrl : String) : Starship{
+        if(database.starshipDao().elementByURl(starshipUrl).isNullOrEmpty()){
+            val id = starshipUrl.split("/")[5]
+            val starship = service.getStarshjpsForId(id)
+            database.starshipDao().insert(starship)
+        }
+        return database.starshipDao().elementByURl(starshipUrl)[0]
     }
 }

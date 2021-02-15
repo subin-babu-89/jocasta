@@ -53,4 +53,16 @@ interface SWApiService {
     @GET("api/{resource}")
     suspend fun getStarshipSearchFor(@Path("resource") resourceName : String, @Query("search") query: String,
                                     @Query("page") page : Int) : Results<Starship>
+
+    @GET("api/films/{id}")
+    suspend fun getFilmForId(@Path("id") id : String) : Film
+
+    @GET("api/species/{id}")
+    suspend fun getSpeciesForId(@Path("id") id : String) : Species
+
+    @GET("api/vehicles/{id}")
+    suspend fun getVehiclesForId(@Path("id") id : String) : Vehicle
+
+    @GET("api/starships/{id}")
+    suspend fun getStarshjpsForId(@Path("id") id : String) : Starship
 }

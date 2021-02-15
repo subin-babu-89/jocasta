@@ -50,6 +50,9 @@
         <argument
             android:name="people"
             app:argType="com.example.jocasta.network.model.People" />
+        <action
+            android:id="@+id/peopleDetailToFilmDetail"
+            app:destination="@id/filmDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/planetDetailFragment"
