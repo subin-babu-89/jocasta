@@ -51,7 +51,7 @@ class SpeciesDetailFragment : Fragment() {
         binding.viewModel = viewModel
 
         binding.peopleList.adapter = DetailsPeopleAdapter(DetailsPeopleAdapter.ResourceClickListener {
-            val action = FilmDetailFragmentDirections.filmDetailToPeopleDetail(it)
+            val action = SpeciesDetailFragmentDirections.speciesDetailToPeopleDetail(it)
             findNavController().navigate(action)
         })
 
@@ -62,7 +62,7 @@ class SpeciesDetailFragment : Fragment() {
         })
 
         binding.filmsList.adapter = DetailsFilmsAdapter(DetailsFilmsAdapter.ResourceClickListener {
-            val action = PeopleDetailFragmentDirections.peopleDetailToFilmDetail(it)
+            val action = SpeciesDetailFragmentDirections.speciesDetailToFilmDetail(it)
             findNavController().navigate(action)
         })
 
