@@ -8,6 +8,7 @@ import com.example.jocasta.R
 import com.example.jocasta.db.entity.ResourceType
 import com.example.jocasta.ui.adapter.DetailsFilmsAdapter
 import com.example.jocasta.ui.adapter.ResourceTypeGridAdapter
+import com.example.jocasta.ui.detail.FilmDetailViewModel
 import com.example.jocasta.ui.detail.PeopleDetailViewModel
 import com.example.jocasta.ui.detail.PlanetDetailViewModel
 import com.example.jocasta.ui.resources.SWAPIStatus
@@ -46,10 +47,37 @@ fun bindStarshipsRecyclerView(recyclerView: RecyclerView, data: List<String>?, v
 fun bindingPeoplePlanetDetails(recyclerView: RecyclerView, data: List<String>?, viewModel: PlanetDetailViewModel){
     viewModel.getPeopleDetails(data!!)
 }
+
 @BindingAdapter(value = ["listFilmsOnPlanet", "vM"], requireAll = true)
 fun bindFilmsOnPlanetDetails(recyclerView: RecyclerView, data: List<String>?, viewModel: PlanetDetailViewModel){
     viewModel.getFilmDetails(data!!)
 }
+
+@BindingAdapter(value = ["listPeopleOnFilm", "vM"], requireAll = true)
+fun bindPeopleOnFilmDetails(recyclerView: RecyclerView, data: List<String>?, viewModel : FilmDetailViewModel){
+    viewModel.getPeopleDetails(data!!)
+}
+
+@BindingAdapter(value = ["listPlanetsOnFilm", "vM"], requireAll = true)
+fun bindPlanetsOnFilmDetails(recyclerView: RecyclerView, data: List<String>?, viewModel : FilmDetailViewModel){
+    viewModel.getPlanetDetails(data!!)
+}
+
+@BindingAdapter(value = ["listStarshipOnFilm", "vM"], requireAll = true)
+fun bindStarshipsOnFilmDetails(recyclerView: RecyclerView, data: List<String>?, viewModel : FilmDetailViewModel){
+    viewModel.getStarshipDetails(data!!)
+}
+
+@BindingAdapter(value = ["listVehiclesOnFilm", "vM"], requireAll = true)
+fun bindVehiclesOnFilmDetails(recyclerView: RecyclerView, data: List<String>?, viewModel : FilmDetailViewModel){
+    viewModel.getVehicleDetails(data!!)
+}
+
+@BindingAdapter(value = ["listSpeciesOnFilm", "vM"], requireAll = true)
+fun bindSpeciesOnFilmDetails(recyclerView: RecyclerView, data: List<String>?, viewModel : FilmDetailViewModel){
+    viewModel.getSpeciesDetails(data!!)
+}
+
 @BindingAdapter("swApiStatus")
 fun bindResourceTypeFetchStatus(statusImageView : ImageView, status : SWAPIStatus?){
     when(status) {

@@ -68,4 +68,7 @@ interface SWApiService {
 
     @GET("api/people/{id}")
     suspend fun getPeopleForId(@Path("id") id : String) : People
+
+    @GET("api/planets/{id}")
+    suspend fun getPlanetForId(@Path("id") id : String) : Planet
 }

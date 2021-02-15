@@ -93,6 +93,15 @@ class ResourceRepository (private val service : SWApiService, private val databa
         return database.filmDao().filmByURL(filmUrl)[0]
     }
 
+    suspend fun getPlanetFor(planetUrl : String) : Planet{
+        if(database.filmDao().filmByURL(planetUrl).isNullOrEmpty()){
+            val id = planetUrl.split("/")[5]
+            val planet = service.getPlanetForId(id)
+            database.planetDao().insert(planet)
+        }
+        return database.planetDao().elementByUrl(planetUrl)[0]
+    }
+
     suspend fun getSpeciesFor(speciesUrl : String) : Species{
         if(database.speciesDao().elementByURl(speciesUrl).isNullOrEmpty()){
             val id = speciesUrl.split("/")[5]
