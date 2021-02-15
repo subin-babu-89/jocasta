@@ -1,9 +1,6 @@
 package com.example.jocasta.network
 
-import com.example.jocasta.network.model.People
-import com.example.jocasta.network.model.Planet
-import com.example.jocasta.network.model.Resources
-import com.example.jocasta.network.model.Results
+import com.example.jocasta.network.model.*
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
@@ -40,4 +37,8 @@ interface SWApiService {
     @GET("api/{resource}")
     suspend fun getPlanetSearchFor(@Path("resource") resourceName : String, @Query("search") query: String,
                                    @Query("page") page : Int) : Results<Planet>
+
+    @GET("api/{resource}")
+    suspend fun getFilmSearchFor(@Path("resource") resourceName : String, @Query("search") query: String,
+                                   @Query("page") page : Int) : Results<Film>
 }

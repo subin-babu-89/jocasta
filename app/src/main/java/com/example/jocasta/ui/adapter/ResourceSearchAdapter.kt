@@ -51,7 +51,7 @@ class ResourceSearchAdapter : PagingDataAdapter<AbstractResource, ResourceSearch
 
         private fun showPersonData(resource: AbstractResource) {
             this.resource = resource
-            name.text = resource.name
+            name.text = resource.url.toString()
         }
 
         companion object{
@@ -70,7 +70,7 @@ class ResourceSearchAdapter : PagingDataAdapter<AbstractResource, ResourceSearch
             }
 
             override fun areContentsTheSame(oldItem: AbstractResource, newItem: AbstractResource): Boolean {
-                return oldItem.name == newItem.name
+                return oldItem.url == newItem.url
             }
         }
     }

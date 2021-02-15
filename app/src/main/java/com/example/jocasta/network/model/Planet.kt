@@ -13,7 +13,7 @@ data class Planet(
     var peopleID : Long = 0L,
 
     @property:Json(name = "name")
-    override var name: String,
+    var name: String,
 
     @property:Json(name = "rotation_period")
     var rotationPeriod: String,

@@ -15,7 +15,7 @@ data class People(
     var peopleID : Long = 0L,
 
     @Json(name = "name")
-    override var name: String,
+    var name: String,
 
     @Json(name = "height")
     var height: String,
