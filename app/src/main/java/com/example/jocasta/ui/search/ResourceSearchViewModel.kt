@@ -60,6 +60,11 @@ class ResourceSearchViewModel(private val repository: ResourceRepository) : View
                 _currentSearchResult = newResult as Flow<PagingData<AbstractResource>>
                 return newResult
             }
+            "vehicles" -> {
+                val newResult = repository.getSearchResults<Vehicle>(resourceType, query).cachedIn(viewModelScope)
+                _currentSearchResult = newResult as Flow<PagingData<AbstractResource>>
+                return newResult
+            }
             else -> {
                 val newResult = repository.getSearchResults<People>(resourceType, query).cachedIn(viewModelScope)
                 _currentSearchResult = newResult as Flow<PagingData<AbstractResource>>

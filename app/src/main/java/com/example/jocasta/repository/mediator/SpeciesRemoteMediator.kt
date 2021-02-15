@@ -1,21 +1,13 @@
 package com.example.jocasta.repository.mediator
 
-import android.app.DownloadManager
-import android.app.Service
-import android.provider.MediaStore
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
 import com.example.jocasta.db.JocastaDatabase
-import com.example.jocasta.db.entity.FilmRemoteKeys
-import com.example.jocasta.db.entity.PlanetRemoteKeys
 import com.example.jocasta.db.entity.SpeciesRemoteKeys
 import com.example.jocasta.network.SWApiService
-import com.example.jocasta.network.model.Film
-import com.example.jocasta.network.model.Planet
-import com.example.jocasta.network.model.Results
 import com.example.jocasta.network.model.Species
 import retrofit2.HttpException
 import java.io.IOException
@@ -29,8 +21,8 @@ class SpeciesRemoteMediator(
     private val query: String,
     private val service: SWApiService,
     private val database: JocastaDatabase
-) : RemoteMediator<Int, Film>(){
-    override suspend fun load(loadType: LoadType, state: PagingState<Int, Film>): MediatorResult {
+) : RemoteMediator<Int, Species>(){
+    override suspend fun load(loadType: LoadType, state: PagingState<Int, Species>): MediatorResult {
         val page = when(loadType){
             LoadType.REFRESH -> {
                 val remoteKeys = getRemoteKeyClosestToCurrentPosition(state)
@@ -83,7 +75,7 @@ class SpeciesRemoteMediator(
 
 
 
-    private suspend fun getRemoteKeyClosestToCurrentPosition(state: PagingState<Int, Film>): SpeciesRemoteKeys? {
+    private suspend fun getRemoteKeyClosestToCurrentPosition(state: PagingState<Int, Species>): SpeciesRemoteKeys? {
         return state.anchorPosition?.let { position ->
             state.closestItemToPosition(position)?.let { species ->
                 database.speciesRemoteKeysDao().remoteKeysForPerson(species.getNumber())
@@ -91,13 +83,13 @@ class SpeciesRemoteMediator(
         }
     }
 
-    private suspend fun getRemoteKeyForFirstItem(state: PagingState<Int, Film>): SpeciesRemoteKeys? {
+    private suspend fun getRemoteKeyForFirstItem(state: PagingState<Int, Species>): SpeciesRemoteKeys? {
         return state.pages.firstOrNull(){ it.data.isNotEmpty() }?.data?.firstOrNull()?.let { species ->
             database.speciesRemoteKeysDao().remoteKeysForPerson(species.getNumber())
         }
     }
 
-    private suspend fun getRemoteKeyForLastTime(state: PagingState<Int, Film>): SpeciesRemoteKeys? {
+    private suspend fun getRemoteKeyForLastTime(state: PagingState<Int, Species>): SpeciesRemoteKeys? {
         return state.pages.lastOrNull() { it.data.isNotEmpty() }?.data?.lastOrNull()?.let { species ->
             database.speciesRemoteKeysDao().remoteKeysForPerson(species.getNumber())
         }

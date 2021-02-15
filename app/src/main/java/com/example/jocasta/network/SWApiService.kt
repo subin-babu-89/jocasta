@@ -45,4 +45,8 @@ interface SWApiService {
     @GET("api/{resource}")
     suspend fun getSpeciesSearchFor(@Path("resource") resourceName : String, @Query("search") query: String,
                                  @Query("page") page : Int) : Results<Species>
+
+    @GET("api/{resource}")
+    suspend fun getVehicleSearchFor(@Path("resource") resourceName : String, @Query("search") query: String,
+                                    @Query("page") page : Int) : Results<Vehicle>
 }

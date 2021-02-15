@@ -6,10 +6,7 @@ import com.example.jocasta.network.SWApiService
 import com.example.jocasta.network.model.AbstractResource
 import com.example.jocasta.network.model.People
 import com.example.jocasta.network.model.Planet
-import com.example.jocasta.repository.mediator.FilmRemoteMediator
-import com.example.jocasta.repository.mediator.PeopleRemoteMediator
-import com.example.jocasta.repository.mediator.PlanetRemoteMediator
-import com.example.jocasta.repository.mediator.SpeciesRemoteMediator
+import com.example.jocasta.repository.mediator.*
 import kotlinx.coroutines.flow.Flow
 
 @Suppress("UNCHECKED_CAST")
@@ -47,6 +44,12 @@ class ResourceRepository (private val service : SWApiService, private val databa
             "films" -> {
                 { database.filmDao().elementsByName(dbQuery)} as () -> PagingSource<Int, AbstractResource>
             }
+            "species" -> {
+                { database.speciesDao().elementsByName(dbQuery)} as () -> PagingSource<Int, AbstractResource>
+            }
+            "vehicles" -> {
+                { database.vehicleDao().elementsByName(dbQuery)} as () -> PagingSource<Int, AbstractResource>
+            }
             else -> {
                 { database.peopleDao().elementsByName(dbQuery)} as () -> PagingSource<Int, AbstractResource>
             }
@@ -63,11 +66,14 @@ class ResourceRepository (private val service : SWApiService, private val databa
                 PlanetRemoteMediator(query, service, database) as RemoteMediator<Int, AbstractResource>
             }
             "films" -> {
-                FilmRemoteMediator(query, service, database) as RemoteMediator<Int, AbstractResource>
+                FilmRemoteMediator(resourceType, query, service, database) as RemoteMediator<Int, AbstractResource>
             }
             "species" -> {
                 SpeciesRemoteMediator(resourceType, query, service, database) as RemoteMediator<Int, AbstractResource>
              }
+            "vehicles" -> {
+                VehicleRemoteMediator(resourceType, query, service, database) as RemoteMediator<Int, AbstractResource>
+            }
             else -> {
                 PeopleRemoteMediator(query, service, database) as RemoteMediator<Int, AbstractResource>
             }
