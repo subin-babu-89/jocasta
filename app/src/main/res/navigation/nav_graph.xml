@@ -53,6 +53,15 @@
         <action
             android:id="@+id/peopleDetailToFilmDetail"
             app:destination="@id/filmDetailFragment" />
+        <action
+            android:id="@+id/peopleDetailToVehicleDetail"
+            app:destination="@id/vehicleDetailFragment" />
+        <action
+            android:id="@+id/peopleDetailToSpeciesDetail"
+            app:destination="@id/speciesDetailFragment" />
+        <action
+            android:id="@+id/peopleDetailToStarShip"
+            app:destination="@id/starshipDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/planetDetailFragment"
@@ -62,6 +71,12 @@
         <argument
             android:name="planet"
             app:argType="com.example.jocasta.network.model.Planet" />
+        <action
+            android:id="@+id/planetDetailToPeopleDetail"
+            app:destination="@id/peopleDetailFragment" />
+        <action
+            android:id="@+id/planetDetailToFilmDetail"
+            app:destination="@id/filmDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/filmDetailFragment"
@@ -71,6 +86,21 @@
         <argument
             android:name="film"
             app:argType="com.example.jocasta.network.model.Film" />
+        <action
+            android:id="@+id/filmDetailToPeopleDetail"
+            app:destination="@id/peopleDetailFragment" />
+        <action
+            android:id="@+id/filmDetailToPlanetDetail"
+            app:destination="@id/planetDetailFragment" />
+        <action
+            android:id="@+id/filmDetailToStarshipDetail"
+            app:destination="@id/starshipDetailFragment" />
+        <action
+            android:id="@+id/filmDetailToVehicleDetail"
+            app:destination="@id/vehicleDetailFragment" />
+        <action
+            android:id="@+id/filmDetailToSpeciesDetail"
+            app:destination="@id/speciesDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/speciesDetailFragment"
@@ -80,6 +110,12 @@
         <argument
             android:name="species"
             app:argType="com.example.jocasta.network.model.Species" />
+        <action
+            android:id="@+id/speciesDetailToPeopleDetail"
+            app:destination="@id/peopleDetailFragment" />
+        <action
+            android:id="@+id/speciesDetailToFilmDetail"
+            app:destination="@id/filmDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/vehicleDetailFragment"
@@ -89,6 +125,9 @@
         <argument
             android:name="vehicle"
             app:argType="com.example.jocasta.network.model.Vehicle" />
+        <action
+            android:id="@+id/vehicleDetailToFilmDetail"
+            app:destination="@id/filmDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/starshipDetailFragment"
@@ -98,5 +137,8 @@
         <argument
             android:name="starship"
             app:argType="com.example.jocasta.network.model.Starship" />
+        <action
+            android:id="@+id/starshipDetailToFilmDetail"
+            app:destination="@id/filmDetailFragment" />
     </fragment>
 </navigation>

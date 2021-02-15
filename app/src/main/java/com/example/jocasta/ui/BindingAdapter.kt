@@ -9,6 +9,7 @@ import com.example.jocasta.db.entity.ResourceType
 import com.example.jocasta.ui.adapter.DetailsFilmsAdapter
 import com.example.jocasta.ui.adapter.ResourceTypeGridAdapter
 import com.example.jocasta.ui.detail.PeopleDetailViewModel
+import com.example.jocasta.ui.detail.PlanetDetailViewModel
 import com.example.jocasta.ui.resources.SWAPIStatus
 import timber.log.Timber
 
@@ -41,6 +42,14 @@ fun bindStarshipsRecyclerView(recyclerView: RecyclerView, data: List<String>?, v
     viewModel.getStarships(data!!)
 }
 
+@BindingAdapter(value = ["listPeopleOnPlanet", "vM"], requireAll = true)
+fun bindingPeoplePlanetDetails(recyclerView: RecyclerView, data: List<String>?, viewModel: PlanetDetailViewModel){
+    viewModel.getPeopleDetails(data!!)
+}
+@BindingAdapter(value = ["listFilmsOnPlanet", "vM"], requireAll = true)
+fun bindFilmsOnPlanetDetails(recyclerView: RecyclerView, data: List<String>?, viewModel: PlanetDetailViewModel){
+    viewModel.getFilmDetails(data!!)
+}
 @BindingAdapter("swApiStatus")
 fun bindResourceTypeFetchStatus(statusImageView : ImageView, status : SWAPIStatus?){
     when(status) {

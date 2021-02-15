@@ -6,28 +6,28 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.jocasta.databinding.SimpleClickableTextViewBinding
-import com.example.jocasta.network.model.Film
+import com.example.jocasta.network.model.Starship
 
-class DetailsFilmsAdapter(private val onClickListener : ResourceClickListener) : ListAdapter<Film, DetailsFilmsAdapter.SimpleClickableTextViewHolder>(DETAILS_FILMS_COMPARATOR){
+class DetailsStarshipAdapter(private val onClickListener : ResourceClickListener) : ListAdapter<Starship, DetailsStarshipAdapter.SimpleClickableTextViewHolder>(DETAILS_FILMS_COMPARATOR){
     companion object {
-        private val DETAILS_FILMS_COMPARATOR = object : DiffUtil.ItemCallback<Film>(){
-            override fun areItemsTheSame(oldItem: Film, newItem: Film): Boolean {
+        private val DETAILS_FILMS_COMPARATOR = object : DiffUtil.ItemCallback<Starship>(){
+            override fun areItemsTheSame(oldItem: Starship, newItem: Starship): Boolean {
                 return oldItem == newItem
             }
 
-            override fun areContentsTheSame(oldItem: Film, newItem: Film): Boolean {
-                return oldItem.title == newItem.title
+            override fun areContentsTheSame(oldItem: Starship, newItem: Starship): Boolean {
+                return oldItem.name == newItem.name
             }
         }
     }
 
-    class ResourceClickListener(val clickListener: (film: Film) -> Unit){
-        fun onClick(film: Film) = clickListener(film)
+    class ResourceClickListener(val clickListener: (starship : Starship) -> Unit){
+        fun onClick(starship: Starship) = clickListener(starship)
     }
 
     class SimpleClickableTextViewHolder(private var binding : SimpleClickableTextViewBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind (film : Film){
-            binding.textString = film.title
+        fun bind (starship: Starship){
+            binding.textString = starship.name
             binding.executePendingBindings()
         }
     }
@@ -40,8 +40,8 @@ class DetailsFilmsAdapter(private val onClickListener : ResourceClickListener) :
     }
 
     override fun onBindViewHolder(holder: SimpleClickableTextViewHolder, position: Int) {
-        val item: Film = getItem(position)
-        item?.let {
+        val item: Starship = getItem(position)
+        item.let {
             holder.itemView.setOnClickListener {
                 onClickListener.onClick(item)
             }

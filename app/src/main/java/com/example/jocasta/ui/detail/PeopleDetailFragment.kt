@@ -17,20 +17,14 @@ import com.example.jocasta.network.model.People
 import com.example.jocasta.repository.ResourceListRepository
 import com.example.jocasta.repository.ResourceRepository
 import com.example.jocasta.ui.adapter.DetailsFilmsAdapter
+import com.example.jocasta.ui.adapter.DetailsSpeciesAdapter
+import com.example.jocasta.ui.adapter.DetailsStarshipAdapter
+import com.example.jocasta.ui.adapter.DetailsVehiclesAdapter
 import com.example.jocasta.ui.resources.ResourcesViewModel
 import timber.log.Timber
 import kotlin.time.TimedValue
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [PeopleDetailFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class PeopleDetailFragment : Fragment() {
 
     companion object {
@@ -56,63 +50,54 @@ class PeopleDetailFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val binding = FragmentPeopleDetailBinding.inflate(inflater)
         binding.person = person
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
         binding.recyclerView.adapter = DetailsFilmsAdapter(DetailsFilmsAdapter.ResourceClickListener {
-                for (film in viewModel.films.value!!){
-                    if (film.title == it){
-                        val action = PeopleDetailFragmentDirections.peopleDetailToFilmDetail(film)
-                        findNavController().navigate(action)
-                    }
-                }
+            val action = PeopleDetailFragmentDirections.peopleDetailToFilmDetail(it)
+            findNavController().navigate(action)
         })
 
-        binding.speciesList.adapter = DetailsFilmsAdapter(DetailsFilmsAdapter.ResourceClickListener {
-            Timber.d("testing for $it")
+        binding.speciesList.adapter = DetailsSpeciesAdapter(DetailsSpeciesAdapter.ResourceClickListener {
+            val action = PeopleDetailFragmentDirections.peopleDetailToSpeciesDetail(it)
+            findNavController().navigate(action)
         })
 
-        binding.vehiclesList.adapter = DetailsFilmsAdapter(DetailsFilmsAdapter.ResourceClickListener {
-            Timber.d("testing for $it")
+        binding.vehiclesList.adapter = DetailsVehiclesAdapter(DetailsVehiclesAdapter.ResourceClickListener {
+            val action = PeopleDetailFragmentDirections.peopleDetailToVehicleDetail(it)
+            findNavController().navigate(action)
         })
 
-        binding.starshipList.adapter = DetailsFilmsAdapter(DetailsFilmsAdapter.ResourceClickListener {
-            Timber.d("testing for $it")
+        binding.starshipList.adapter = DetailsStarshipAdapter(DetailsStarshipAdapter.ResourceClickListener {
+            val action = PeopleDetailFragmentDirections.peopleDetailToStarShip(it)
+            findNavController().navigate(action)
         })
 
-        viewModel.films.observe(viewLifecycleOwner, Observer {
-            Timber.d("here films ${it.size}")
+        viewModel.films.observe(viewLifecycleOwner, {
             val adapter = binding.recyclerView.adapter as DetailsFilmsAdapter
             adapter.submitList(null)
-            val map: List<String?> = it.map { it -> it.title }
-            adapter.submitList(map)
+            adapter.submitList(it)
         })
 
-        viewModel.species.observe(viewLifecycleOwner, Observer {
-            Timber.d("here species ${it.size}")
-            val adapter = binding.speciesList.adapter as DetailsFilmsAdapter
+        viewModel.species.observe(viewLifecycleOwner, {
+            val adapter = binding.speciesList.adapter as DetailsSpeciesAdapter
             adapter.submitList(null)
-            val map: List<String?> = it.map { it -> it.name }
-            adapter.submitList(map)
+            adapter.submitList(it)
         })
 
-        viewModel.vehicles.observe(viewLifecycleOwner, Observer {
-            Timber.d("here vehicles ${it.size}")
-            val adapter = binding.vehiclesList.adapter as DetailsFilmsAdapter
+        viewModel.vehicles.observe(viewLifecycleOwner, {
+            val adapter = binding.vehiclesList.adapter as DetailsVehiclesAdapter
             adapter.submitList(null)
-            val map: List<String?> = it.map { it -> it.name }
-            adapter.submitList(map)
+            adapter.submitList(it)
         })
 
-        viewModel.starships.observe(viewLifecycleOwner, Observer {
-            Timber.d("here starships ${it.size}")
-            val adapter = binding.starshipList.adapter as DetailsFilmsAdapter
+        viewModel.starships.observe(viewLifecycleOwner, {
+            val adapter = binding.starshipList.adapter as DetailsStarshipAdapter
             adapter.submitList(null)
-            val map: List<String?> = it.map { it -> it.name }
-            adapter.submitList(map)
+            adapter.submitList(it)
         })
         return binding.root
     }

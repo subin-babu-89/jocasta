@@ -5,11 +5,7 @@ import com.example.jocasta.db.JocastaDatabase
 import com.example.jocasta.network.SWApiService
 import com.example.jocasta.network.model.*
 import com.example.jocasta.repository.mediator.*
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.withContext
-import timber.log.Timber
-import java.lang.Exception
 
 @Suppress("UNCHECKED_CAST")
 class ResourceRepository (private val service : SWApiService, private val database: JocastaDatabase) {
@@ -118,9 +114,18 @@ class ResourceRepository (private val service : SWApiService, private val databa
     suspend fun getStarshipFor(starshipUrl : String) : Starship{
         if(database.starshipDao().elementByURl(starshipUrl).isNullOrEmpty()){
             val id = starshipUrl.split("/")[5]
-            val starship = service.getStarshjpsForId(id)
+            val starship = service.getStarshipForId(id)
             database.starshipDao().insert(starship)
         }
         return database.starshipDao().elementByURl(starshipUrl)[0]
+    }
+
+    suspend fun getPeopleFor(peopleUrl : String) : People{
+        if(database.peopleDao().elementByURl(peopleUrl).isNullOrEmpty()){
+            val id = peopleUrl.split("/")[5]
+            val people = service.getPeopleForId(id)
+            database.peopleDao().insert(people)
+        }
+        return database.peopleDao().elementByURl(peopleUrl)[0]
     }
 }
