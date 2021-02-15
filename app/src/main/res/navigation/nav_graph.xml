@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/resourcesFragment">
+
+    <fragment
+        android:id="@+id/resourcesFragment"
+        android:name="com.example.jocasta.ui.resources.ResourcesFragment"
+        android:label="resources_fragment"
+        tools:layout="@layout/resources_fragment" >
+        <action
+            android:id="@+id/navigateToSearch"
+            app:destination="@id/resourceSearchFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/resourceSearchFragment"
+        android:name="com.example.jocasta.ui.search.ResourceSearchFragment"
+        android:label="ResourceSearchFragment"
+        tools:layout="@layout/resource_search_fragment">
+        <argument
+            android:name="resource"
+            app:argType="com.example.jocasta.db.entity.ResourceType" />
+    </fragment>
+</navigation>

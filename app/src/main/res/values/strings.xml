@@ -2,4 +2,7 @@
     <string name="app_name">Jocasta</string>
     <string name="title_item_detail">Item Detail</string>
     <string name="title_item_list">Items</string>
+    <string name="resource_image">Resource Image</string>
+    <string name="retry">Retry</string>
+    <string name="sw_api">SW API</string>
 </resources>
