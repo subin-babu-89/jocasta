@@ -96,6 +96,16 @@ fun bindFilmsOnVehicleDetails(recyclerView: RecyclerView, data: List<String>?, v
     viewModel.getFilmDetails(data!!)
 }
 
+@BindingAdapter(value = ["listPeopleOnStarship", "vM"], requireAll = true)
+fun bindPeopleOnStarshipDetails(recyclerView: RecyclerView, data: List<String>?, viewModel : StarshipDetailViewModel){
+    viewModel.getPeopleDetails(data!!)
+}
+
+@BindingAdapter(value = ["listFilmsOnStarships", "vM"], requireAll = true)
+fun bindFilmsOnStarshipDetails(recyclerView: RecyclerView, data: List<String>?, viewModel : StarshipDetailViewModel){
+    viewModel.getFilmDetails(data!!)
+}
+
 @BindingAdapter("swApiStatus")
 fun bindResourceTypeFetchStatus(statusImageView : ImageView, status : SWAPIStatus?){
     when(status) {

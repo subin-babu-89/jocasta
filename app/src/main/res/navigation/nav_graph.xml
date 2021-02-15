@@ -143,5 +143,8 @@
         <action
             android:id="@+id/starshipDetailToFilmDetail"
             app:destination="@id/filmDetailFragment" />
+        <action
+            android:id="@+id/starshipDetailToPeopleDetail"
+            app:destination="@id/peopleDetailFragment" />
     </fragment>
 </navigation>
