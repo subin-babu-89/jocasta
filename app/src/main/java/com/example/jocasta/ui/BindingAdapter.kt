@@ -11,6 +11,7 @@ import com.example.jocasta.ui.adapter.ResourceTypeGridAdapter
 import com.example.jocasta.ui.detail.FilmDetailViewModel
 import com.example.jocasta.ui.detail.PeopleDetailViewModel
 import com.example.jocasta.ui.detail.PlanetDetailViewModel
+import com.example.jocasta.ui.detail.SpeciesDetailViewModel
 import com.example.jocasta.ui.resources.SWAPIStatus
 import timber.log.Timber
 
@@ -76,6 +77,16 @@ fun bindVehiclesOnFilmDetails(recyclerView: RecyclerView, data: List<String>?, v
 @BindingAdapter(value = ["listSpeciesOnFilm", "vM"], requireAll = true)
 fun bindSpeciesOnFilmDetails(recyclerView: RecyclerView, data: List<String>?, viewModel : FilmDetailViewModel){
     viewModel.getSpeciesDetails(data!!)
+}
+
+@BindingAdapter(value = ["listPeopleOnSpecies", "vM"], requireAll = true)
+fun bindPeopleOnSpeciesDetails(recyclerView: RecyclerView, data: List<String>?, viewModel : SpeciesDetailViewModel){
+    viewModel.getPeopleDetails(data!!)
+}
+
+@BindingAdapter(value = ["listFilmsOnSpecies", "vM"], requireAll = true)
+fun bindFilmsOnSpeciesDetails(recyclerView: RecyclerView, data: List<String>?, viewModel : SpeciesDetailViewModel){
+    viewModel.getFilmDetails(data!!)
 }
 
 @BindingAdapter("swApiStatus")
