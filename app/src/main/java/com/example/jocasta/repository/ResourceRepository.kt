@@ -50,6 +50,9 @@ class ResourceRepository (private val service : SWApiService, private val databa
             "vehicles" -> {
                 { database.vehicleDao().elementsByName(dbQuery)} as () -> PagingSource<Int, AbstractResource>
             }
+            "starships" -> {
+                { database.starshipDao().elementsByName(dbQuery)} as () -> PagingSource<Int, AbstractResource>
+            }
             else -> {
                 { database.peopleDao().elementsByName(dbQuery)} as () -> PagingSource<Int, AbstractResource>
             }
@@ -73,6 +76,9 @@ class ResourceRepository (private val service : SWApiService, private val databa
              }
             "vehicles" -> {
                 VehicleRemoteMediator(resourceType, query, service, database) as RemoteMediator<Int, AbstractResource>
+            }
+            "starships" -> {
+                StarshipRemoteMediator(resourceType, query, service, database) as RemoteMediator<Int, AbstractResource>
             }
             else -> {
                 PeopleRemoteMediator(query, service, database) as RemoteMediator<Int, AbstractResource>

@@ -15,7 +15,8 @@ import com.example.jocasta.network.model.*
         Planet::class, PlanetRemoteKeys::class,
         Film::class, FilmRemoteKeys::class,
         Species::class, SpeciesRemoteKeys::class,
-        Vehicle::class, VehicleRemoteKeys::class],
+        Vehicle::class, VehicleRemoteKeys::class,
+        Starship::class, StarshipRemoteKeys::class],
     version = 1,
     exportSchema = false
 )
@@ -38,6 +39,9 @@ abstract class JocastaDatabase : RoomDatabase() {
 
     abstract fun vehicleDao() : VehicleDao
     abstract fun vehicleRemoteKeysDao() : VehicleRemoteKeysDao
+
+    abstract fun starshipDao() : StarshipDao
+    abstract fun starshipRemoteKeysDao() : StarshipRemoteKeysDao
 
     companion object{
         @Volatile
