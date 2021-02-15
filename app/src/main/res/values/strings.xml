@@ -5,4 +5,6 @@
     <string name="resource_image">Resource Image</string>
     <string name="retry">Retry</string>
     <string name="sw_api">SW API</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

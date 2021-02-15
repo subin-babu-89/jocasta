@@ -13,7 +13,7 @@ data class Planet(
     var peopleID : Long = 0L,
 
     @property:Json(name = "name")
-    var name: String,
+    override var name: String?,
 
     @property:Json(name = "rotation_period")
     var rotationPeriod: String,
@@ -52,5 +52,7 @@ data class Planet(
     var edited: String,
 
     @property:Json(name = "url")
-    override var url: String
+    override var url: String,
+
+    override var title: String?
 ) : Parcelable, AbstractResource()

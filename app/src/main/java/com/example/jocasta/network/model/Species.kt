@@ -13,7 +13,7 @@ data class Species(
     var peopleID : Long = 0L,
 
     @Json(name = "name")
-    var name: String,
+    override var name: String?,
 
     @Json(name = "classification")
     var classification: String,
@@ -55,6 +55,8 @@ data class Species(
     var edited: String,
 
     @Json(name = "url")
-    override var url: String
+    override var url: String,
+
+    override var title: String?
 ) : Parcelable, AbstractResource()
 

@@ -23,5 +23,77 @@
         <argument
             android:name="resource"
             app:argType="com.example.jocasta.db.entity.ResourceType" />
+        <action
+            android:id="@+id/navigateToPeopleDetail"
+            app:destination="@id/peopleDetailFragment" />
+        <action
+            android:id="@+id/navigateToPlanetDetail"
+            app:destination="@id/planetDetailFragment" />
+        <action
+            android:id="@+id/navigateToFilmDetail"
+            app:destination="@id/filmDetailFragment" />
+        <action
+            android:id="@+id/navigateToSpeciesDetail"
+            app:destination="@id/speciesDetailFragment" />
+        <action
+            android:id="@+id/navigateToVehicleDetail"
+            app:destination="@id/vehicleDetailFragment" />
+        <action
+            android:id="@+id/navigateToStarshipDetail"
+            app:destination="@id/starshipDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/peopleDetailFragment"
+        android:name="com.example.jocasta.ui.detail.PeopleDetailFragment"
+        android:label="fragment_people_detail"
+        tools:layout="@layout/fragment_people_detail" >
+        <argument
+            android:name="people"
+            app:argType="com.example.jocasta.network.model.People" />
+    </fragment>
+    <fragment
+        android:id="@+id/planetDetailFragment"
+        android:name="com.example.jocasta.ui.detail.PlanetDetailFragment"
+        android:label="fragment_planet_detail"
+        tools:layout="@layout/fragment_planet_detail" >
+        <argument
+            android:name="planet"
+            app:argType="com.example.jocasta.network.model.Planet" />
+    </fragment>
+    <fragment
+        android:id="@+id/filmDetailFragment"
+        android:name="com.example.jocasta.ui.detail.FilmDetailFragment"
+        android:label="fragment_film_detail"
+        tools:layout="@layout/fragment_film_detail" >
+        <argument
+            android:name="film"
+            app:argType="com.example.jocasta.network.model.Film" />
+    </fragment>
+    <fragment
+        android:id="@+id/speciesDetailFragment"
+        android:name="com.example.jocasta.ui.detail.SpeciesDetailFragment"
+        android:label="fragment_species_detail"
+        tools:layout="@layout/fragment_species_detail" >
+        <argument
+            android:name="species"
+            app:argType="com.example.jocasta.network.model.Species" />
+    </fragment>
+    <fragment
+        android:id="@+id/vehicleDetailFragment"
+        android:name="com.example.jocasta.ui.detail.VehicleDetailFragment"
+        android:label="fragment_vehicle_detail"
+        tools:layout="@layout/fragment_vehicle_detail" >
+        <argument
+            android:name="vehicle"
+            app:argType="com.example.jocasta.network.model.Vehicle" />
+    </fragment>
+    <fragment
+        android:id="@+id/starshipDetailFragment"
+        android:name="com.example.jocasta.ui.detail.StarshipDetailFragment"
+        android:label="fragment_starship_detail"
+        tools:layout="@layout/fragment_starship_detail" >
+        <argument
+            android:name="starship"
+            app:argType="com.example.jocasta.network.model.Starship" />
     </fragment>
 </navigation>

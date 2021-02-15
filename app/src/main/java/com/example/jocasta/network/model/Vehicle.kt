@@ -13,50 +13,52 @@ data class Vehicle(
     var peopleID : Long = 0L,
 
     @Json(name = "name")
-    var name: String? = null,
+    override var name: String?,
 
     @Json(name = "model")
-    var model: String? = null,
+    var model: String?,
 
     @Json(name = "manufacturer")
-    var manufacturer: String? = null,
+    var manufacturer: String?,
 
     @Json(name = "cost_in_credits")
-    var costInCredits: String? = null,
+    var costInCredits: String?,
 
     @Json(name = "length")
-    var length: String? = null,
+    var length: String?,
 
     @Json(name = "max_atmosphering_speed")
-    var maxAtmospheringSpeed: String? = null,
+    var maxAtmospheringSpeed: String?,
 
     @Json(name = "crew")
-    var crew: String? = null,
+    var crew: String?,
 
     @Json(name = "passengers")
-    var passengers: String? = null,
+    var passengers: String?,
 
     @Json(name = "cargo_capacity")
-    var cargoCapacity: String? = null,
+    var cargoCapacity: String?,
 
     @Json(name = "consumables")
-    var consumables: String? = null,
+    var consumables: String?,
 
     @Json(name = "vehicle_class")
-    var vehicleClass: String? = null,
+    var vehicleClass: String?,
 
     @Json(name = "pilots")
-    var pilots: List<String>? = null,
+    var pilots: List<String>?,
 
     @Json(name = "films")
-    var films: List<String>? = null,
+    var films: List<String>?,
 
     @Json(name = "created")
-    var created: String? = null,
+    var created: String?,
 
     @Json(name = "edited")
-    var edited: String? = null,
+    var edited: String?,
 
     @Json(name = "url")
-    override var url: String
+    override var url: String,
+
+    override var title: String?
 ): Parcelable, AbstractResource()

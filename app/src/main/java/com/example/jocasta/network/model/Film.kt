@@ -13,7 +13,7 @@ data class Film(
     var peopleID : Long = 0L,
 
     @Json(name = "title")
-    var title: String,
+    override var title: String?,
 
     @Json(name = "episode_id")
     var episodeId: Int,
@@ -52,5 +52,7 @@ data class Film(
     var edited: String,
 
     @Json(name = "url")
-    override var url: String
+    override var url: String,
+
+    override var name: String?
 ) : Parcelable, AbstractResource()

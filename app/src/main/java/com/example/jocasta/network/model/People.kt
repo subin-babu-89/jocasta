@@ -15,7 +15,7 @@ data class People(
     var peopleID : Long = 0L,
 
     @Json(name = "name")
-    var name: String,
+    override var name: String?,
 
     @Json(name = "height")
     var height: String,
@@ -60,5 +60,7 @@ data class People(
     var edited: String,
 
     @Json(name = "url")
-    override var url: String
+    override var url: String,
+
+    override var title: String?
 ) : Parcelable, AbstractResource()
