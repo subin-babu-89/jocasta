@@ -10,10 +10,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.jocasta.R
 import com.example.jocasta.databinding.PeopleViewItemBinding
+import com.example.jocasta.network.model.AbstractResource
 import com.example.jocasta.network.model.People
 import timber.log.Timber
 
-class ResourceSearchAdapter : PagingDataAdapter<People, ResourceSearchAdapter.ResourceSearchViewHolder>(RESOURCE_COMPARATOR) {
+class ResourceSearchAdapter : PagingDataAdapter<AbstractResource, ResourceSearchAdapter.ResourceSearchViewHolder>(RESOURCE_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ResourceSearchViewHolder {
         return ResourceSearchViewHolder.create(parent)
@@ -31,26 +32,26 @@ class ResourceSearchAdapter : PagingDataAdapter<People, ResourceSearchAdapter.Re
 
     class ResourceSearchViewHolder (view : View) : RecyclerView.ViewHolder(view){
         private val name: TextView = view.findViewById(R.id.name)
-        private var person: People? = null
+        private var resource: AbstractResource? = null
 
         init {
             view.setOnClickListener {
-                Timber.d("Person -> $person")
+                Timber.d("Person -> $resource")
             }
         }
 
-        fun bind(person : People){
-            if (person == null){
+        fun bind(resource : AbstractResource){
+            if (resource == null){
                 val resources = itemView.resources
                 name.text = "Loading"
             }else {
-                showPersonData(person)
+                showPersonData(resource)
             }
         }
 
-        private fun showPersonData(person: People) {
-            this.person = person
-            name.text = person.name
+        private fun showPersonData(resource: AbstractResource) {
+            this.resource = resource
+            name.text = resource.name
         }
 
         companion object{
@@ -63,13 +64,13 @@ class ResourceSearchAdapter : PagingDataAdapter<People, ResourceSearchAdapter.Re
     }
 
     companion object{
-        private val RESOURCE_COMPARATOR = object : DiffUtil.ItemCallback<People>(){
-            override fun areItemsTheSame(oldItem: People, newItem: People): Boolean {
+        private val RESOURCE_COMPARATOR = object : DiffUtil.ItemCallback<AbstractResource>(){
+            override fun areItemsTheSame(oldItem: AbstractResource, newItem: AbstractResource): Boolean {
                 return oldItem == newItem
             }
 
-            override fun areContentsTheSame(oldItem: People, newItem: People): Boolean {
-                return oldItem.peopleID == newItem.peopleID
+            override fun areContentsTheSame(oldItem: AbstractResource, newItem: AbstractResource): Boolean {
+                return oldItem.name == newItem.name
             }
         }
     }

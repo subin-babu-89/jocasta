@@ -5,15 +5,15 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.example.jocasta.db.dao.PeopleDao
-import com.example.jocasta.db.dao.PeopleRemoteKeysDao
-import com.example.jocasta.db.dao.ResourceTypeDao
+import com.example.jocasta.db.dao.*
 import com.example.jocasta.db.entity.PeopleRemoteKeys
+import com.example.jocasta.db.entity.PlanetRemoteKeys
 import com.example.jocasta.db.entity.ResourceType
 import com.example.jocasta.network.model.People
+import com.example.jocasta.network.model.Planet
 
 @Database(
-    entities = [ResourceType::class, People::class , PeopleRemoteKeys::class],
+    entities = [ResourceType::class, People::class , PeopleRemoteKeys::class, Planet::class, PlanetRemoteKeys::class],
     version = 1,
     exportSchema = false
 )
@@ -24,6 +24,9 @@ abstract class JocastaDatabase : RoomDatabase() {
 
     abstract fun peopleDao() : PeopleDao
     abstract fun peopleRemoteKeysDao() : PeopleRemoteKeysDao
+
+    abstract fun planetDao() : PlanetDao
+    abstract fun planetRemoteKeysDao() : PlanetRemoteKeysDao
 
     companion object{
         @Volatile

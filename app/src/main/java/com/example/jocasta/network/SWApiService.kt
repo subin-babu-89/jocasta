@@ -1,6 +1,7 @@
 package com.example.jocasta.network
 
 import com.example.jocasta.network.model.People
+import com.example.jocasta.network.model.Planet
 import com.example.jocasta.network.model.Resources
 import com.example.jocasta.network.model.Results
 import com.squareup.moshi.Moshi
@@ -35,4 +36,8 @@ interface SWApiService {
     @GET("api/{resource}")
     suspend fun getPeopleSearchFor(@Path("resource") resourceName : String, @Query("search") query: String,
                                    @Query("page") page : Int) : Results<People>
+
+    @GET("api/{resource}")
+    suspend fun getPlanetSearchFor(@Path("resource") resourceName : String, @Query("search") query: String,
+                                   @Query("page") page : Int) : Results<Planet>
 }

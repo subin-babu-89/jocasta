@@ -3,6 +3,7 @@ package com.example.jocasta.network.model
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
 import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
 
@@ -14,7 +15,7 @@ data class People(
     var peopleID : Long = 0L,
 
     @Json(name = "name")
-    var name: String,
+    override var name: String,
 
     @Json(name = "height")
     var height: String,
@@ -59,5 +60,5 @@ data class People(
     var edited: String,
 
     @Json(name = "url")
-    var url: String
-) : Parcelable
+    override var url: String
+) : Parcelable, AbstractResource()

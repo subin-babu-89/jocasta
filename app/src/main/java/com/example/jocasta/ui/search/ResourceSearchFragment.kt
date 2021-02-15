@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.jocasta.databinding.ResourceSearchFragmentBinding
 import com.example.jocasta.db.JocastaDatabase
+import com.example.jocasta.db.entity.ResourceType
 import com.example.jocasta.network.SWApiService
 import com.example.jocasta.repository.ResourceRepository
 import com.example.jocasta.ui.adapter.ResourceLoadStateAdapter
@@ -33,6 +34,7 @@ class ResourceSearchFragment : Fragment() {
     companion object {
         private const val LAST_SEARCH_QUERY: String = "last_search_query"
         private const val DEFAULT_QUERY = ""
+        const val RESOURCE = "resource"
     }
 
     private var searchJob : Job? = null
@@ -48,10 +50,21 @@ class ResourceSearchFragment : Fragment() {
     private lateinit var binding : ResourceSearchFragmentBinding
     private val adapter = ResourceSearchAdapter()
 
+    private lateinit var resourceType : ResourceType
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
+        resourceType = ResourceSearchFragmentArgs.fromBundle(arguments!!).resource
+
         binding = ResourceSearchFragmentBinding.inflate(inflater)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
@@ -143,7 +156,7 @@ class ResourceSearchFragment : Fragment() {
     private fun search(query : String){
         searchJob?.cancel()
         searchJob = lifecycleScope.launch{
-            viewModel.search(query).collectLatest {
+            viewModel.search(resourceType.resourceName, query).collectLatest {
                 adapter.submitData(it)
                 Timber.d("Current count is ${adapter.itemCount}")
             }
