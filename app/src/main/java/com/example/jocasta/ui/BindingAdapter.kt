@@ -8,10 +8,7 @@ import com.example.jocasta.R
 import com.example.jocasta.db.entity.ResourceType
 import com.example.jocasta.ui.adapter.DetailsFilmsAdapter
 import com.example.jocasta.ui.adapter.ResourceTypeGridAdapter
-import com.example.jocasta.ui.detail.FilmDetailViewModel
-import com.example.jocasta.ui.detail.PeopleDetailViewModel
-import com.example.jocasta.ui.detail.PlanetDetailViewModel
-import com.example.jocasta.ui.detail.SpeciesDetailViewModel
+import com.example.jocasta.ui.detail.*
 import com.example.jocasta.ui.resources.SWAPIStatus
 import timber.log.Timber
 
@@ -86,6 +83,16 @@ fun bindPeopleOnSpeciesDetails(recyclerView: RecyclerView, data: List<String>?, 
 
 @BindingAdapter(value = ["listFilmsOnSpecies", "vM"], requireAll = true)
 fun bindFilmsOnSpeciesDetails(recyclerView: RecyclerView, data: List<String>?, viewModel : SpeciesDetailViewModel){
+    viewModel.getFilmDetails(data!!)
+}
+
+@BindingAdapter(value = ["listPeopleOnVehicles", "vM"], requireAll = true)
+fun bindPeopleOnVehicleDetails(recyclerView: RecyclerView, data: List<String>?, viewModel : VehicleDetailViewModel){
+    viewModel.getPeopleDetails(data!!)
+}
+
+@BindingAdapter(value = ["listFilmsOnVehicles", "vM"], requireAll = true)
+fun bindFilmsOnVehicleDetails(recyclerView: RecyclerView, data: List<String>?, viewModel : VehicleDetailViewModel){
     viewModel.getFilmDetails(data!!)
 }
 
