@@ -9,6 +9,7 @@ import com.example.jocasta.network.model.Planet
 import com.example.jocasta.repository.mediator.FilmRemoteMediator
 import com.example.jocasta.repository.mediator.PeopleRemoteMediator
 import com.example.jocasta.repository.mediator.PlanetRemoteMediator
+import com.example.jocasta.repository.mediator.SpeciesRemoteMediator
 import kotlinx.coroutines.flow.Flow
 
 @Suppress("UNCHECKED_CAST")
@@ -64,6 +65,9 @@ class ResourceRepository (private val service : SWApiService, private val databa
             "films" -> {
                 FilmRemoteMediator(query, service, database) as RemoteMediator<Int, AbstractResource>
             }
+            "species" -> {
+                SpeciesRemoteMediator(resourceType, query, service, database) as RemoteMediator<Int, AbstractResource>
+             }
             else -> {
                 PeopleRemoteMediator(query, service, database) as RemoteMediator<Int, AbstractResource>
             }

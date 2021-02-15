@@ -6,10 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.example.jocasta.network.model.AbstractResource
-import com.example.jocasta.network.model.Film
-import com.example.jocasta.network.model.People
-import com.example.jocasta.network.model.Planet
+import com.example.jocasta.network.model.*
 import com.example.jocasta.repository.ResourceRepository
 import kotlinx.coroutines.flow.Flow
 import timber.log.Timber
@@ -44,22 +41,27 @@ class ResourceSearchViewModel(private val repository: ResourceRepository) : View
 
         when(resourceType){
             "people" -> {
-                val newResult = repository.getSearchResults<People>("people", query).cachedIn(viewModelScope)
+                val newResult = repository.getSearchResults<People>(resourceType, query).cachedIn(viewModelScope)
                 _currentSearchResult = newResult as Flow<PagingData<AbstractResource>>
                 return newResult
             }
             "planets" -> {
-                val newResult = repository.getSearchResults<Planet>("planets", query).cachedIn(viewModelScope)
+                val newResult = repository.getSearchResults<Planet>(resourceType, query).cachedIn(viewModelScope)
                 _currentSearchResult = newResult as Flow<PagingData<AbstractResource>>
                 return newResult
             }
             "films" -> {
-                val newResult = repository.getSearchResults<Film>("films", query).cachedIn(viewModelScope)
+                val newResult = repository.getSearchResults<Film>(resourceType, query).cachedIn(viewModelScope)
+                _currentSearchResult = newResult as Flow<PagingData<AbstractResource>>
+                return newResult
+            }
+            "species" -> {
+                val newResult = repository.getSearchResults<Species>(resourceType, query).cachedIn(viewModelScope)
                 _currentSearchResult = newResult as Flow<PagingData<AbstractResource>>
                 return newResult
             }
             else -> {
-                val newResult = repository.getSearchResults<People>("people", query).cachedIn(viewModelScope)
+                val newResult = repository.getSearchResults<People>(resourceType, query).cachedIn(viewModelScope)
                 _currentSearchResult = newResult as Flow<PagingData<AbstractResource>>
                 return newResult
             }
