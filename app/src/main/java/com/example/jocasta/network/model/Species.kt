@@ -10,7 +10,7 @@ import kotlinx.android.parcel.Parcelize
 @Entity(tableName = "species")
 data class Species(
     @PrimaryKey(autoGenerate = true)
-    var peopleID : Long = 0L,
+    var peopleID: Long = 0L,
 
     @Json(name = "name")
     override var name: String? = "",
@@ -57,6 +57,6 @@ data class Species(
     @Json(name = "url")
     override var url: String = "",
 
-    override var title: String?=""
+    override var title: String? = ""
 ) : Parcelable, AbstractResource()
 

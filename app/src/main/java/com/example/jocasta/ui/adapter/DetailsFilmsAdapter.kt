@@ -8,9 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.jocasta.databinding.SimpleClickableTextViewBinding
 import com.example.jocasta.network.model.Film
 
-class DetailsFilmsAdapter(private val onClickListener : ResourceClickListener) : ListAdapter<Film, DetailsFilmsAdapter.SimpleClickableTextViewHolder>(DETAILS_FILMS_COMPARATOR){
+class DetailsFilmsAdapter(private val onClickListener: ResourceClickListener) :
+    ListAdapter<Film, DetailsFilmsAdapter.SimpleClickableTextViewHolder>(DETAILS_FILMS_COMPARATOR) {
     companion object {
-        private val DETAILS_FILMS_COMPARATOR = object : DiffUtil.ItemCallback<Film>(){
+        private val DETAILS_FILMS_COMPARATOR = object : DiffUtil.ItemCallback<Film>() {
             override fun areItemsTheSame(oldItem: Film, newItem: Film): Boolean {
                 return oldItem == newItem
             }
@@ -21,7 +22,7 @@ class DetailsFilmsAdapter(private val onClickListener : ResourceClickListener) :
         }
     }
 
-    class ResourceClickListener(val clickListener: (film: Film) -> Unit){
+    class ResourceClickListener(val clickListener: (film: Film) -> Unit) {
         fun onClick(film: Film) {
             return when {
                 film.url.isEmpty() -> {
@@ -33,8 +34,9 @@ class DetailsFilmsAdapter(private val onClickListener : ResourceClickListener) :
         }
     }
 
-    class SimpleClickableTextViewHolder(private var binding : SimpleClickableTextViewBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind (film : Film){
+    class SimpleClickableTextViewHolder(private var binding: SimpleClickableTextViewBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(film: Film) {
             binding.textString = film.title
             binding.executePendingBindings()
         }
@@ -44,12 +46,18 @@ class DetailsFilmsAdapter(private val onClickListener : ResourceClickListener) :
         parent: ViewGroup,
         viewType: Int
     ): SimpleClickableTextViewHolder {
-        return SimpleClickableTextViewHolder(SimpleClickableTextViewBinding.inflate(LayoutInflater.from(parent.context)))
+        return SimpleClickableTextViewHolder(
+            SimpleClickableTextViewBinding.inflate(
+                LayoutInflater.from(
+                    parent.context
+                )
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: SimpleClickableTextViewHolder, position: Int) {
         val item: Film = getItem(position)
-        item?.let {
+        item.let {
             holder.itemView.setOnClickListener {
                 onClickListener.onClick(item)
             }

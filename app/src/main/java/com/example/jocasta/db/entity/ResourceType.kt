@@ -9,9 +9,9 @@ import kotlinx.android.parcel.Parcelize
 @Entity(tableName = "resource_types")
 data class ResourceType(
     @PrimaryKey(autoGenerate = true)
-    val resourceID : Int = 0,
+    val resourceID: Int = 0,
 
-    val resourceName : String,
+    val resourceName: String,
 
-    val resourceAPIURL : String
+    val resourceAPIURL: String
 ) : Parcelable

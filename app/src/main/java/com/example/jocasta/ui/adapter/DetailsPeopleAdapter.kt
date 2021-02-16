@@ -6,12 +6,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.jocasta.databinding.SimpleClickableTextViewBinding
-import com.example.jocasta.network.model.Film
 import com.example.jocasta.network.model.People
 
-class DetailsPeopleAdapter(private val onClickListener : ResourceClickListener) : ListAdapter<People, DetailsPeopleAdapter.SimpleClickableTextViewHolder>(DETAILS_FILMS_COMPARATOR){
+class DetailsPeopleAdapter(private val onClickListener: ResourceClickListener) :
+    ListAdapter<People, DetailsPeopleAdapter.SimpleClickableTextViewHolder>(DETAILS_FILMS_COMPARATOR) {
     companion object {
-        private val DETAILS_FILMS_COMPARATOR = object : DiffUtil.ItemCallback<People>(){
+        private val DETAILS_FILMS_COMPARATOR = object : DiffUtil.ItemCallback<People>() {
             override fun areItemsTheSame(oldItem: People, newItem: People): Boolean {
                 return oldItem == newItem
             }
@@ -22,7 +22,7 @@ class DetailsPeopleAdapter(private val onClickListener : ResourceClickListener) 
         }
     }
 
-    class ResourceClickListener(val clickListener: (people : People) -> Unit){
+    class ResourceClickListener(val clickListener: (people: People) -> Unit) {
         fun onClick(people: People) {
             return when {
                 people.url.isEmpty() -> {
@@ -34,8 +34,9 @@ class DetailsPeopleAdapter(private val onClickListener : ResourceClickListener) 
         }
     }
 
-    class SimpleClickableTextViewHolder(private var binding : SimpleClickableTextViewBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind (people: People){
+    class SimpleClickableTextViewHolder(private var binding: SimpleClickableTextViewBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(people: People) {
             binding.textString = people.name
             binding.executePendingBindings()
         }
@@ -45,7 +46,13 @@ class DetailsPeopleAdapter(private val onClickListener : ResourceClickListener) 
         parent: ViewGroup,
         viewType: Int
     ): SimpleClickableTextViewHolder {
-        return SimpleClickableTextViewHolder(SimpleClickableTextViewBinding.inflate(LayoutInflater.from(parent.context)))
+        return SimpleClickableTextViewHolder(
+            SimpleClickableTextViewBinding.inflate(
+                LayoutInflater.from(
+                    parent.context
+                )
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: SimpleClickableTextViewHolder, position: Int) {

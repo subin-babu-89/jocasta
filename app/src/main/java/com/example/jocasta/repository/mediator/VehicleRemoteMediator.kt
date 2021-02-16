@@ -17,30 +17,29 @@ private const val STARTING_PAGE_INDEX = 1
 
 @OptIn(ExperimentalPagingApi::class)
 class VehicleRemoteMediator(
-    private val resourceType : String,
+    private val resourceType: String,
     private val query: String,
     private val service: SWApiService,
     private val database: JocastaDatabase
-) : RemoteMediator<Int, Vehicle>(){
-    override suspend fun load(loadType: LoadType, state: PagingState<Int, Vehicle>): MediatorResult {
-        val page = when(loadType){
+) : RemoteMediator<Int, Vehicle>() {
+    override suspend fun load(
+        loadType: LoadType,
+        state: PagingState<Int, Vehicle>
+    ): MediatorResult {
+        val page = when (loadType) {
             LoadType.REFRESH -> {
                 val remoteKeys = getRemoteKeyClosestToCurrentPosition(state)
-                remoteKeys?.nextKey?.minus(1)?: STARTING_PAGE_INDEX
+                remoteKeys?.nextKey?.minus(1) ?: STARTING_PAGE_INDEX
             }
             LoadType.PREPEND -> {
                 val remoteKeys = getRemoteKeyForFirstItem(state)
-                if (remoteKeys == null)
-                    throw InvalidObjectException("Remote key and the prevKey should not be null")
-                val prevKey = remoteKeys.prevKey
-                if(prevKey == null){
-                    return MediatorResult.Success(endOfPaginationReached = true)
-                }
+                    ?: throw InvalidObjectException("Remote key and the prevKey should not be null")
+                remoteKeys.prevKey ?: return MediatorResult.Success(endOfPaginationReached = true)
                 remoteKeys.prevKey
             }
             LoadType.APPEND -> {
                 val remoteKeys = getRemoteKeyForLastTime(state)
-                if (remoteKeys == null || remoteKeys.nextKey == null)
+                if (remoteKeys?.nextKey == null)
                     throw InvalidObjectException("Remote key and the prevKey should not be null")
                 remoteKeys.nextKey
             }
@@ -49,7 +48,7 @@ class VehicleRemoteMediator(
         try {
             val apiResponse = service.getVehicleSearchFor(resourceType, query, page)
             val elements = apiResponse.elements!!
-            var endOfPaginationReached = elements.isEmpty() || apiResponse.next == null
+            val endOfPaginationReached = elements.isEmpty() || apiResponse.next == null
 
             database.withTransaction {
                 // clear all tables in the database
@@ -66,13 +65,12 @@ class VehicleRemoteMediator(
                 database.vehicleDao().insertAll(elements)
             }
             return MediatorResult.Success(endOfPaginationReached = endOfPaginationReached)
-        }catch (exception : IOException){
+        } catch (exception: IOException) {
             return MediatorResult.Error(exception)
-        }catch (exception : HttpException){
+        } catch (exception: HttpException) {
             return MediatorResult.Error(exception)
         }
     }
-
 
 
     private suspend fun getRemoteKeyClosestToCurrentPosition(state: PagingState<Int, Vehicle>): VehicleRemoteKeys? {
@@ -84,19 +82,21 @@ class VehicleRemoteMediator(
     }
 
     private suspend fun getRemoteKeyForFirstItem(state: PagingState<Int, Vehicle>): VehicleRemoteKeys? {
-        return state.pages.firstOrNull(){ it.data.isNotEmpty() }?.data?.firstOrNull()?.let { vehicle ->
-            database.vehicleRemoteKeysDao().remoteKeysForPerson(vehicle.getNumber())
-        }
+        return state.pages.firstOrNull { it.data.isNotEmpty() }?.data?.firstOrNull()
+            ?.let { vehicle ->
+                database.vehicleRemoteKeysDao().remoteKeysForPerson(vehicle.getNumber())
+            }
     }
 
     private suspend fun getRemoteKeyForLastTime(state: PagingState<Int, Vehicle>): VehicleRemoteKeys? {
-        return state.pages.lastOrNull() { it.data.isNotEmpty() }?.data?.lastOrNull()?.let { vehicle ->
-            database.vehicleRemoteKeysDao().remoteKeysForPerson(vehicle.getNumber())
-        }
+        return state.pages.lastOrNull { it.data.isNotEmpty() }?.data?.lastOrNull()
+            ?.let { vehicle ->
+                database.vehicleRemoteKeysDao().remoteKeysForPerson(vehicle.getNumber())
+            }
     }
 
 }
 
-fun Vehicle.getNumber() : Long {
+fun Vehicle.getNumber(): Long {
     return this.url.split("/")[5].toLong()
 }

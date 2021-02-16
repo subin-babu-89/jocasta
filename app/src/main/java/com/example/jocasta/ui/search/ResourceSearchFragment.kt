@@ -1,18 +1,17 @@
 package com.example.jocasta.ui.search
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.KeyEvent
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.jocasta.databinding.ResourceSearchFragmentBinding
 import com.example.jocasta.db.JocastaDatabase
@@ -34,46 +33,43 @@ class ResourceSearchFragment : Fragment() {
     companion object {
         private const val LAST_SEARCH_QUERY: String = "last_search_query"
         private const val DEFAULT_QUERY = ""
-        const val RESOURCE = "resource"
     }
 
-    private var searchJob : Job? = null
+    private var searchJob: Job? = null
 
     private val viewModel: ResourceSearchViewModel by lazy {
-        ViewModelProvider(this,
+        ViewModelProvider(
+            this,
             ResourceSearchViewModel.Companion.ViewModelFactory(
-                ResourceRepository(SWApiService.create(), JocastaDatabase.getInstance(requireContext()))
+                ResourceRepository(
+                    SWApiService.create(),
+                    JocastaDatabase.getInstance(requireContext())
+                )
             )
         ).get(ResourceSearchViewModel::class.java)
     }
 
-    private lateinit var binding : ResourceSearchFragmentBinding
+    private lateinit var binding: ResourceSearchFragmentBinding
     private val adapter = ResourceSearchAdapter()
 
-    private lateinit var resourceType : ResourceType
+    private lateinit var resourceType: ResourceType
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
 
-        resourceType = ResourceSearchFragmentArgs.fromBundle(arguments!!).resource
+        resourceType = ResourceSearchFragmentArgs.fromBundle(requireArguments()).resource
 
         binding = ResourceSearchFragmentBinding.inflate(inflater)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
         binding.resultsList.layoutManager = LinearLayoutManager(requireContext())
-//        binding.resultsList.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
 
         initAdapter()
-        val query = savedInstanceState?.getString(LAST_SEARCH_QUERY)?: DEFAULT_QUERY
+        val query = savedInstanceState?.getString(LAST_SEARCH_QUERY) ?: DEFAULT_QUERY
         search(query)
         initSearch(query)
 
@@ -86,8 +82,8 @@ class ResourceSearchFragment : Fragment() {
 
     private fun initAdapter() {
         binding.resultsList.adapter = adapter.withLoadStateHeaderAndFooter(
-            header = ResourceLoadStateAdapter{adapter.retry()},
-            footer = ResourceLoadStateAdapter{adapter.retry()}
+            header = ResourceLoadStateAdapter { adapter.retry() },
+            footer = ResourceLoadStateAdapter { adapter.retry() }
         )
 
         adapter.addLoadStateListener { loadState ->
@@ -114,35 +110,37 @@ class ResourceSearchFragment : Fragment() {
         }
     }
 
-    private fun initSearch(str : String) {
+    private fun initSearch(str: String) {
         binding.searchSwApi.setText(str)
 
-        binding.searchSwApi.setOnEditorActionListener{ _, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_GO){
+        binding.searchSwApi.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_GO) {
                 updateRepoListFromInput()
                 true
-            }else{
+            } else {
                 false
             }
         }
 
         binding.searchSwApi.setOnKeyListener { _, keyCode, event ->
-            if(event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER){
+            if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
                 updateRepoListFromInput()
                 true
-            }else{
+            } else {
                 false
             }
         }
 
         lifecycleScope.launch {
             adapter.loadStateFlow.distinctUntilChangedBy {
-                it.refresh }
-                .filter {
-                    it.refresh is LoadState.NotLoading }
-                .collect {
-                binding.resultsList.scrollToPosition(0)
+                it.refresh
             }
+                .filter {
+                    it.refresh is LoadState.NotLoading
+                }
+                .collect {
+                    binding.resultsList.scrollToPosition(0)
+                }
         }
     }
 
@@ -153,9 +151,9 @@ class ResourceSearchFragment : Fragment() {
         }
     }
 
-    private fun search(query : String){
+    private fun search(query: String) {
         searchJob?.cancel()
-        searchJob = lifecycleScope.launch{
+        searchJob = lifecycleScope.launch {
             viewModel.search(resourceType.resourceName, query).collectLatest {
                 adapter.submitData(it)
                 Timber.d("Current count is ${adapter.itemCount}")

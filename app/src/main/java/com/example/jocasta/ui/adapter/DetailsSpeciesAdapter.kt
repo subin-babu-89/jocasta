@@ -6,12 +6,14 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.jocasta.databinding.SimpleClickableTextViewBinding
-import com.example.jocasta.network.model.Film
 import com.example.jocasta.network.model.Species
 
-class DetailsSpeciesAdapter(private val onClickListener : ResourceClickListener) : ListAdapter<Species, DetailsSpeciesAdapter.SimpleClickableTextViewHolder>(DETAILS_FILMS_COMPARATOR){
+class DetailsSpeciesAdapter(private val onClickListener: ResourceClickListener) :
+    ListAdapter<Species, DetailsSpeciesAdapter.SimpleClickableTextViewHolder>(
+        DETAILS_FILMS_COMPARATOR
+    ) {
     companion object {
-        private val DETAILS_FILMS_COMPARATOR = object : DiffUtil.ItemCallback<Species>(){
+        private val DETAILS_FILMS_COMPARATOR = object : DiffUtil.ItemCallback<Species>() {
             override fun areItemsTheSame(oldItem: Species, newItem: Species): Boolean {
                 return oldItem == newItem
             }
@@ -22,7 +24,7 @@ class DetailsSpeciesAdapter(private val onClickListener : ResourceClickListener)
         }
     }
 
-    class ResourceClickListener(val clickListener: (species: Species) -> Unit){
+    class ResourceClickListener(val clickListener: (species: Species) -> Unit) {
         fun onClick(species: Species) {
             return when {
                 species.url.isEmpty() -> {
@@ -34,8 +36,9 @@ class DetailsSpeciesAdapter(private val onClickListener : ResourceClickListener)
         }
     }
 
-    class SimpleClickableTextViewHolder(private var binding : SimpleClickableTextViewBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind (species: Species){
+    class SimpleClickableTextViewHolder(private var binding: SimpleClickableTextViewBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(species: Species) {
             binding.textString = species.name
             binding.executePendingBindings()
         }
@@ -45,7 +48,13 @@ class DetailsSpeciesAdapter(private val onClickListener : ResourceClickListener)
         parent: ViewGroup,
         viewType: Int
     ): SimpleClickableTextViewHolder {
-        return SimpleClickableTextViewHolder(SimpleClickableTextViewBinding.inflate(LayoutInflater.from(parent.context)))
+        return SimpleClickableTextViewHolder(
+            SimpleClickableTextViewBinding.inflate(
+                LayoutInflater.from(
+                    parent.context
+                )
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: SimpleClickableTextViewHolder, position: Int) {

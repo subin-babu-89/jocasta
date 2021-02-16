@@ -1,8 +1,5 @@
 package com.example.jocasta.repository.mediator
 
-import android.app.DownloadManager
-import android.app.Service
-import android.provider.MediaStore
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
@@ -20,38 +17,35 @@ private const val STARTING_PAGE_INDEX = 1
 
 @OptIn(ExperimentalPagingApi::class)
 class PlanetRemoteMediator(
+    private val resourceType: String,
     private val query: String,
     private val service: SWApiService,
     private val database: JocastaDatabase
-) : RemoteMediator<Int, Planet>(){
+) : RemoteMediator<Int, Planet>() {
     override suspend fun load(loadType: LoadType, state: PagingState<Int, Planet>): MediatorResult {
-        val page = when(loadType){
+        val page = when (loadType) {
             LoadType.REFRESH -> {
                 val remoteKeys = getRemoteKeyClosestToCurrentPosition(state)
-                remoteKeys?.nextKey?.minus(1)?: STARTING_PAGE_INDEX
+                remoteKeys?.nextKey?.minus(1) ?: STARTING_PAGE_INDEX
             }
             LoadType.PREPEND -> {
                 val remoteKeys = getRemoteKeyForFirstItem(state)
-                if (remoteKeys == null)
-                    throw InvalidObjectException("Remote key and the prevKey should not be null")
-                val prevKey = remoteKeys.prevKey
-                if(prevKey == null){
-                    return MediatorResult.Success(endOfPaginationReached = true)
-                }
+                    ?: throw InvalidObjectException("Remote key and the prevKey should not be null")
+                remoteKeys.prevKey ?: return MediatorResult.Success(endOfPaginationReached = true)
                 remoteKeys.prevKey
             }
             LoadType.APPEND -> {
                 val remoteKeys = getRemoteKeyForLastTime(state)
-                if (remoteKeys == null || remoteKeys.nextKey == null)
+                if (remoteKeys?.nextKey == null)
                     throw InvalidObjectException("Remote key and the prevKey should not be null")
                 remoteKeys.nextKey
             }
         }
 
         try {
-            val apiResponse = service.getPlanetSearchFor("planets", query, page)
+            val apiResponse = service.getPlanetSearchFor(resourceType, query, page)
             val elements = apiResponse.elements!!
-            var endOfPaginationReached = elements.isEmpty() || apiResponse.next == null
+            val endOfPaginationReached = elements.isEmpty() || apiResponse.next == null
 
             database.withTransaction {
                 // clear all tables in the database
@@ -68,13 +62,12 @@ class PlanetRemoteMediator(
                 database.planetDao().insertAll(elements)
             }
             return MediatorResult.Success(endOfPaginationReached = endOfPaginationReached)
-        }catch (exception : IOException){
+        } catch (exception: IOException) {
             return MediatorResult.Error(exception)
-        }catch (exception : HttpException){
+        } catch (exception: HttpException) {
             return MediatorResult.Error(exception)
         }
     }
-
 
 
     private suspend fun getRemoteKeyClosestToCurrentPosition(state: PagingState<Int, Planet>): PlanetRemoteKeys? {
@@ -86,19 +79,21 @@ class PlanetRemoteMediator(
     }
 
     private suspend fun getRemoteKeyForFirstItem(state: PagingState<Int, Planet>): PlanetRemoteKeys? {
-        return state.pages.firstOrNull(){ it.data.isNotEmpty() }?.data?.firstOrNull()?.let { planet ->
-            database.planetRemoteKeysDao().remoteKeysForPerson(planet.getNumber())
-        }
+        return state.pages.firstOrNull { it.data.isNotEmpty() }?.data?.firstOrNull()
+            ?.let { planet ->
+                database.planetRemoteKeysDao().remoteKeysForPerson(planet.getNumber())
+            }
     }
 
     private suspend fun getRemoteKeyForLastTime(state: PagingState<Int, Planet>): PlanetRemoteKeys? {
-        return state.pages.lastOrNull() { it.data.isNotEmpty() }?.data?.lastOrNull()?.let { planet ->
-            database.planetRemoteKeysDao().remoteKeysForPerson(planet.getNumber())
-        }
+        return state.pages.lastOrNull { it.data.isNotEmpty() }?.data?.lastOrNull()
+            ?.let { planet ->
+                database.planetRemoteKeysDao().remoteKeysForPerson(planet.getNumber())
+            }
     }
 
 }
 
-fun Planet.getNumber() : Long {
+fun Planet.getNumber(): Long {
     return this.url.split("/")[5].toLong()
 }

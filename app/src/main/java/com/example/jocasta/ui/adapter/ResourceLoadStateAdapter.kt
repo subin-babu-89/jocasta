@@ -9,7 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.jocasta.R
 import com.example.jocasta.databinding.ResourceLoadStateFooterViewItemBinding
 
-class ResourceLoadStateAdapter(private val retry : () -> Unit) : LoadStateAdapter<ResourceLoadStateAdapter.ResourceLoadStateViewHolder>(){
+class ResourceLoadStateAdapter(private val retry: () -> Unit) :
+    LoadStateAdapter<ResourceLoadStateAdapter.ResourceLoadStateViewHolder>() {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -22,10 +23,14 @@ class ResourceLoadStateAdapter(private val retry : () -> Unit) : LoadStateAdapte
         holder.bind(loadState)
     }
 
-    class ResourceLoadStateViewHolder(private val binding: ResourceLoadStateFooterViewItemBinding, retry: () -> Unit) : RecyclerView.ViewHolder(binding.root) {
-        companion object{
-            fun create(parent : ViewGroup, retry: () -> Unit) : ResourceLoadStateViewHolder {
-                val view = LayoutInflater.from(parent.context).inflate(R.layout.resource_load_state_footer_view_item, parent, false)
+    class ResourceLoadStateViewHolder(
+        private val binding: ResourceLoadStateFooterViewItemBinding,
+        retry: () -> Unit
+    ) : RecyclerView.ViewHolder(binding.root) {
+        companion object {
+            fun create(parent: ViewGroup, retry: () -> Unit): ResourceLoadStateViewHolder {
+                val view = LayoutInflater.from(parent.context)
+                    .inflate(R.layout.resource_load_state_footer_view_item, parent, false)
                 val binding = ResourceLoadStateFooterViewItemBinding.bind(view)
                 return ResourceLoadStateViewHolder(binding, retry)
             }
@@ -35,8 +40,8 @@ class ResourceLoadStateAdapter(private val retry : () -> Unit) : LoadStateAdapte
             binding.retryButton.setOnClickListener { retry.invoke() }
         }
 
-        fun bind(loadState : LoadState){
-            if (loadState is LoadState.Error){
+        fun bind(loadState: LoadState) {
+            if (loadState is LoadState.Error) {
                 binding.errorMsg.text = loadState.error.localizedMessage
             }
             binding.progressBar.isVisible = loadState is LoadState.Loading
@@ -44,7 +49,6 @@ class ResourceLoadStateAdapter(private val retry : () -> Unit) : LoadStateAdapte
             binding.errorMsg.isVisible = loadState !is LoadState.Loading
         }
     }
-
 
 
 }

@@ -3,7 +3,6 @@ package com.example.jocasta.network.model
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.google.gson.annotations.SerializedName
 import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
 
@@ -12,7 +11,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class People(
     @PrimaryKey(autoGenerate = true)
-    var peopleID : Long = 0L,
+    var peopleID: Long = 0L,
 
     @Json(name = "name")
     override var name: String? = "",

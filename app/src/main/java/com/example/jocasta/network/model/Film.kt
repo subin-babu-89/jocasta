@@ -10,7 +10,7 @@ import kotlinx.android.parcel.Parcelize
 @Entity(tableName = "films")
 data class Film(
     @PrimaryKey(autoGenerate = true)
-    var peopleID : Long = 0L,
+    var peopleID: Long = 0L,
 
     @Json(name = "title")
     override var title: String? = "",

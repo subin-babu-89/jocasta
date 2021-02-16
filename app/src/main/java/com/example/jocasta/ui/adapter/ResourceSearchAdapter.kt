@@ -13,7 +13,10 @@ import com.example.jocasta.network.model.*
 import com.example.jocasta.ui.search.ResourceSearchFragmentDirections
 import timber.log.Timber
 
-class ResourceSearchAdapter : PagingDataAdapter<AbstractResource, ResourceSearchAdapter.ResourceSearchViewHolder>(RESOURCE_COMPARATOR) {
+class ResourceSearchAdapter :
+    PagingDataAdapter<AbstractResource, ResourceSearchAdapter.ResourceSearchViewHolder>(
+        RESOURCE_COMPARATOR
+    ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ResourceSearchViewHolder {
         return ResourceSearchViewHolder.create(parent)
@@ -22,26 +25,32 @@ class ResourceSearchAdapter : PagingDataAdapter<AbstractResource, ResourceSearch
     override fun onBindViewHolder(holder: ResourceSearchViewHolder, position: Int) {
         val resource = getItem(position)
         holder.itemView.setOnClickListener {
-                Timber.d("resource clicked $resource")
-                when(resource){
-                    is People -> {
-                        it.findNavController().navigate(ResourceSearchFragmentDirections.navigateToPeopleDetail(resource as People))
-                    }
-                    is Planet -> {
-                        it.findNavController().navigate(ResourceSearchFragmentDirections.navigateToPlanetDetail(resource as Planet))
-                    }
-                    is Film -> {
-                        it.findNavController().navigate(ResourceSearchFragmentDirections.navigateToFilmDetail(resource as Film))
-                    }
-                    is Species -> {
-                        it.findNavController().navigate(ResourceSearchFragmentDirections.navigateToSpeciesDetail(resource as Species))
-                    }
-                    is Vehicle -> {
-                        it.findNavController().navigate(ResourceSearchFragmentDirections.navigateToVehicleDetail(resource as Vehicle))
-                    }
-                    is Starship -> {
-                        it.findNavController().navigate(ResourceSearchFragmentDirections.navigateToStarshipDetail(resource as Starship))
-                    }
+            Timber.d("resource clicked $resource")
+            when (resource) {
+                is People -> {
+                    it.findNavController()
+                        .navigate(ResourceSearchFragmentDirections.navigateToPeopleDetail(resource))
+                }
+                is Planet -> {
+                    it.findNavController()
+                        .navigate(ResourceSearchFragmentDirections.navigateToPlanetDetail(resource))
+                }
+                is Film -> {
+                    it.findNavController()
+                        .navigate(ResourceSearchFragmentDirections.navigateToFilmDetail(resource))
+                }
+                is Species -> {
+                    it.findNavController()
+                        .navigate(ResourceSearchFragmentDirections.navigateToSpeciesDetail(resource))
+                }
+                is Vehicle -> {
+                    it.findNavController()
+                        .navigate(ResourceSearchFragmentDirections.navigateToVehicleDetail(resource))
+                }
+                is Starship -> {
+                    it.findNavController()
+                        .navigate(ResourceSearchFragmentDirections.navigateToStarshipDetail(resource))
+                }
             }
         }
         resource?.let {
@@ -49,47 +58,45 @@ class ResourceSearchAdapter : PagingDataAdapter<AbstractResource, ResourceSearch
         }
     }
 
-    class ResourceSearchViewHolder (view : View) : RecyclerView.ViewHolder(view){
+    class ResourceSearchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val name: TextView = view.findViewById(R.id.name)
         private var resource: AbstractResource? = null
 
-        fun bind(resource : AbstractResource){
-            if (resource == null){
-                val resources = itemView.resources
-                name.text = "Loading"
-            }else {
-                showPersonData(resource)
-            }
+        fun bind(resource: AbstractResource) {
+            showPersonData(resource)
         }
 
         private fun showPersonData(resource: AbstractResource) {
             this.resource = resource
-            name.text = if(resource is Film) resource.title.toString() else resource.name.toString()
+            name.text =
+                if (resource is Film) resource.title.toString() else resource.name.toString()
         }
 
-        companion object{
-            fun create(parent: ViewGroup) : ResourceSearchViewHolder{
-                val view = LayoutInflater.from(parent.context).inflate(R.layout.resource_view_item, parent, false)
+        companion object {
+            fun create(parent: ViewGroup): ResourceSearchViewHolder {
+                val view = LayoutInflater.from(parent.context)
+                    .inflate(R.layout.resource_view_item, parent, false)
                 return ResourceSearchViewHolder(view)
             }
         }
 
     }
 
-    companion object{
-        private val RESOURCE_COMPARATOR = object : DiffUtil.ItemCallback<AbstractResource>(){
-            override fun areItemsTheSame(oldItem: AbstractResource, newItem: AbstractResource): Boolean {
+    companion object {
+        private val RESOURCE_COMPARATOR = object : DiffUtil.ItemCallback<AbstractResource>() {
+            override fun areItemsTheSame(
+                oldItem: AbstractResource,
+                newItem: AbstractResource
+            ): Boolean {
                 return oldItem == newItem
             }
 
-            override fun areContentsTheSame(oldItem: AbstractResource, newItem: AbstractResource): Boolean {
+            override fun areContentsTheSame(
+                oldItem: AbstractResource,
+                newItem: AbstractResource
+            ): Boolean {
                 return oldItem.url == newItem.url
             }
         }
     }
-
-    class ResourceClickListener(val clickListener: (resource : AbstractResource) -> Unit){
-        fun onClick(resource : AbstractResource) = clickListener(resource)
-    }
-
 }

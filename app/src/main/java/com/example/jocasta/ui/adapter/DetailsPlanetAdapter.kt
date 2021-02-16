@@ -6,12 +6,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.jocasta.databinding.SimpleClickableTextViewBinding
-import com.example.jocasta.network.model.Film
 import com.example.jocasta.network.model.Planet
 
-class DetailsPlanetAdapter(private val onClickListener : ResourceClickListener) : ListAdapter<Planet, DetailsPlanetAdapter.SimpleClickableTextViewHolder>(DETAILS_FILMS_COMPARATOR){
+class DetailsPlanetAdapter(private val onClickListener: ResourceClickListener) :
+    ListAdapter<Planet, DetailsPlanetAdapter.SimpleClickableTextViewHolder>(DETAILS_FILMS_COMPARATOR) {
     companion object {
-        private val DETAILS_FILMS_COMPARATOR = object : DiffUtil.ItemCallback<Planet>(){
+        private val DETAILS_FILMS_COMPARATOR = object : DiffUtil.ItemCallback<Planet>() {
             override fun areItemsTheSame(oldItem: Planet, newItem: Planet): Boolean {
                 return oldItem == newItem
             }
@@ -22,7 +22,7 @@ class DetailsPlanetAdapter(private val onClickListener : ResourceClickListener) 
         }
     }
 
-    class ResourceClickListener(val clickListener: (planet : Planet) -> Unit){
+    class ResourceClickListener(val clickListener: (planet: Planet) -> Unit) {
         fun onClick(planet: Planet) {
             return when {
                 planet.url.isEmpty() -> {
@@ -34,8 +34,9 @@ class DetailsPlanetAdapter(private val onClickListener : ResourceClickListener) 
         }
     }
 
-    class SimpleClickableTextViewHolder(private var binding : SimpleClickableTextViewBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind (planet: Planet){
+    class SimpleClickableTextViewHolder(private var binding: SimpleClickableTextViewBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(planet: Planet) {
             binding.textString = planet.name
             binding.executePendingBindings()
         }
@@ -45,7 +46,13 @@ class DetailsPlanetAdapter(private val onClickListener : ResourceClickListener) 
         parent: ViewGroup,
         viewType: Int
     ): SimpleClickableTextViewHolder {
-        return SimpleClickableTextViewHolder(SimpleClickableTextViewBinding.inflate(LayoutInflater.from(parent.context)))
+        return SimpleClickableTextViewHolder(
+            SimpleClickableTextViewBinding.inflate(
+                LayoutInflater.from(
+                    parent.context
+                )
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: SimpleClickableTextViewHolder, position: Int) {

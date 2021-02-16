@@ -1,12 +1,11 @@
 package com.example.jocasta.ui.resources
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.jocasta.databinding.ResourcesFragmentBinding
 import com.example.jocasta.db.JocastaDatabase
@@ -16,14 +15,14 @@ import com.example.jocasta.ui.adapter.ResourceTypeGridAdapter
 
 class ResourcesFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = ResourcesFragment()
-    }
-
     private val viewModel: ResourcesViewModel by lazy {
-        ViewModelProvider(this,
+        ViewModelProvider(
+            this,
             ResourcesViewModel.Companion.ViewModelFactory(
-                ResourceListRepository(SWApiService.create(), JocastaDatabase.getInstance(requireContext()))
+                ResourceListRepository(
+                    SWApiService.create(),
+                    JocastaDatabase.getInstance(requireContext())
+                )
             )
         ).get(ResourcesViewModel::class.java)
     }
@@ -42,15 +41,16 @@ class ResourcesFragment : Fragment() {
         binding.viewModel = viewModel
 
         // Sets the adapter of the photosGrid RecyclerView
-        binding.resourceGrid.adapter = ResourceTypeGridAdapter(ResourceTypeGridAdapter.ResourceClickListener {
-            viewModel.displayResourceType(it)
-        })
+        binding.resourceGrid.adapter =
+            ResourceTypeGridAdapter(ResourceTypeGridAdapter.ResourceClickListener {
+                viewModel.displayResourceType(it)
+            })
 
-        viewModel.navigateToSelectedResourceType.observe(viewLifecycleOwner, Observer {
-                if (null !=it){
-                    this.findNavController().navigate(ResourcesFragmentDirections.navigateToSearch(it))
-                    viewModel.displayResourceTypeComplete()
-                }
+        viewModel.navigateToSelectedResourceType.observe(viewLifecycleOwner, {
+            if (null != it) {
+                this.findNavController().navigate(ResourcesFragmentDirections.navigateToSearch(it))
+                viewModel.displayResourceTypeComplete()
+            }
         })
         return binding.root
     }

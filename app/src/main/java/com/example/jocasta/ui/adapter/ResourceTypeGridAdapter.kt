@@ -4,7 +4,6 @@ import android.content.res.Resources
 import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.palette.graphics.Palette
 import androidx.recyclerview.widget.DiffUtil
@@ -22,9 +21,10 @@ import com.example.jocasta.db.entity.ResourceType
 import timber.log.Timber
 
 
-class ResourceTypeGridAdapter(private val onClickListener: ResourceClickListener) : ListAdapter<ResourceType, ResourceTypeGridAdapter.ResourceViewHolder>(
-    RESOURCE_TYPE_DIFF_COMPARATOR
-){
+class ResourceTypeGridAdapter(private val onClickListener: ResourceClickListener) :
+    ListAdapter<ResourceType, ResourceTypeGridAdapter.ResourceViewHolder>(
+        RESOURCE_TYPE_DIFF_COMPARATOR
+    ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ResourceViewHolder {
         return ResourceViewHolder(ResourcesGridItemBinding.inflate(LayoutInflater.from(parent.context)))
@@ -43,9 +43,10 @@ class ResourceTypeGridAdapter(private val onClickListener: ResourceClickListener
         Timber.d("received data : $list")
     }
 
-    class ResourceViewHolder(private var binding: ResourcesGridItemBinding): RecyclerView.ViewHolder(
-        binding.root
-    ) {
+    class ResourceViewHolder(private var binding: ResourcesGridItemBinding) :
+        RecyclerView.ViewHolder(
+            binding.root
+        ) {
         fun bind(resource: ResourceType) {
             val imageUrl = getImageUrlFromArray(resource, itemView.resources)
             binding.resource = resource
@@ -107,8 +108,8 @@ class ResourceTypeGridAdapter(private val onClickListener: ResourceClickListener
         }
     }
 
-    companion object{
-        private val RESOURCE_TYPE_DIFF_COMPARATOR = object : DiffUtil.ItemCallback<ResourceType>(){
+    companion object {
+        private val RESOURCE_TYPE_DIFF_COMPARATOR = object : DiffUtil.ItemCallback<ResourceType>() {
             override fun areItemsTheSame(oldItem: ResourceType, newItem: ResourceType): Boolean {
                 return oldItem == newItem
             }
@@ -120,7 +121,7 @@ class ResourceTypeGridAdapter(private val onClickListener: ResourceClickListener
         }
     }
 
-    class ResourceClickListener(val clickListener: (resource: ResourceType) -> Unit){
+    class ResourceClickListener(val clickListener: (resource: ResourceType) -> Unit) {
         fun onClick(resource: ResourceType) = clickListener(resource)
     }
 }

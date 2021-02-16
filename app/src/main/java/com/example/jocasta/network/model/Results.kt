@@ -2,7 +2,7 @@ package com.example.jocasta.network.model
 
 import com.squareup.moshi.Json
 
-data class Results<T> (
+data class Results<T>(
     @Json(name = "count")
     var count: Int? = null,
 

@@ -1,40 +1,33 @@
 package com.example.jocasta.ui.detail
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.example.jocasta.R
 import com.example.jocasta.databinding.FragmentPeopleDetailBinding
 import com.example.jocasta.db.JocastaDatabase
-import com.example.jocasta.db.entity.ResourceType
 import com.example.jocasta.network.SWApiService
 import com.example.jocasta.network.model.People
-import com.example.jocasta.repository.ResourceListRepository
 import com.example.jocasta.repository.ResourceRepository
 import com.example.jocasta.ui.adapter.DetailsFilmsAdapter
 import com.example.jocasta.ui.adapter.DetailsSpeciesAdapter
 import com.example.jocasta.ui.adapter.DetailsStarshipAdapter
 import com.example.jocasta.ui.adapter.DetailsVehiclesAdapter
-import com.example.jocasta.ui.resources.ResourcesViewModel
-import timber.log.Timber
-import kotlin.time.TimedValue
 
 
 class PeopleDetailFragment : Fragment() {
 
-    companion object {
-
-    }
-
     private val viewModel: PeopleDetailViewModel by lazy {
-        ViewModelProvider(this,
+        ViewModelProvider(
+            this,
             PeopleDetailViewModel.Companion.ViewModelFactory(
-                ResourceRepository(SWApiService.create(), JocastaDatabase.getInstance(requireContext()))
+                ResourceRepository(
+                    SWApiService.create(),
+                    JocastaDatabase.getInstance(requireContext())
+                )
             )
         ).get(PeopleDetailViewModel::class.java)
     }
@@ -56,25 +49,29 @@ class PeopleDetailFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
-        binding.recyclerView.adapter = DetailsFilmsAdapter(DetailsFilmsAdapter.ResourceClickListener {
-            val action = PeopleDetailFragmentDirections.peopleDetailToFilmDetail(it)
-            findNavController().navigate(action)
-        })
+        binding.recyclerView.adapter =
+            DetailsFilmsAdapter(DetailsFilmsAdapter.ResourceClickListener {
+                val action = PeopleDetailFragmentDirections.peopleDetailToFilmDetail(it)
+                findNavController().navigate(action)
+            })
 
-        binding.speciesList.adapter = DetailsSpeciesAdapter(DetailsSpeciesAdapter.ResourceClickListener {
-            val action = PeopleDetailFragmentDirections.peopleDetailToSpeciesDetail(it)
-            findNavController().navigate(action)
-        })
+        binding.speciesList.adapter =
+            DetailsSpeciesAdapter(DetailsSpeciesAdapter.ResourceClickListener {
+                val action = PeopleDetailFragmentDirections.peopleDetailToSpeciesDetail(it)
+                findNavController().navigate(action)
+            })
 
-        binding.vehiclesList.adapter = DetailsVehiclesAdapter(DetailsVehiclesAdapter.ResourceClickListener {
-            val action = PeopleDetailFragmentDirections.peopleDetailToVehicleDetail(it)
-            findNavController().navigate(action)
-        })
+        binding.vehiclesList.adapter =
+            DetailsVehiclesAdapter(DetailsVehiclesAdapter.ResourceClickListener {
+                val action = PeopleDetailFragmentDirections.peopleDetailToVehicleDetail(it)
+                findNavController().navigate(action)
+            })
 
-        binding.starshipList.adapter = DetailsStarshipAdapter(DetailsStarshipAdapter.ResourceClickListener {
-            val action = PeopleDetailFragmentDirections.peopleDetailToStarShip(it)
-            findNavController().navigate(action)
-        })
+        binding.starshipList.adapter =
+            DetailsStarshipAdapter(DetailsStarshipAdapter.ResourceClickListener {
+                val action = PeopleDetailFragmentDirections.peopleDetailToStarShip(it)
+                findNavController().navigate(action)
+            })
 
         viewModel.films.observe(viewLifecycleOwner, {
             val adapter = binding.recyclerView.adapter as DetailsFilmsAdapter

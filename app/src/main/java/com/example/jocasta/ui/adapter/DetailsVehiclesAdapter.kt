@@ -6,12 +6,14 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.jocasta.databinding.SimpleClickableTextViewBinding
-import com.example.jocasta.network.model.Film
 import com.example.jocasta.network.model.Vehicle
 
-class DetailsVehiclesAdapter(private val onClickListener : ResourceClickListener) : ListAdapter<Vehicle, DetailsVehiclesAdapter.SimpleClickableTextViewHolder>(DETAILS_FILMS_COMPARATOR){
+class DetailsVehiclesAdapter(private val onClickListener: ResourceClickListener) :
+    ListAdapter<Vehicle, DetailsVehiclesAdapter.SimpleClickableTextViewHolder>(
+        DETAILS_FILMS_COMPARATOR
+    ) {
     companion object {
-        private val DETAILS_FILMS_COMPARATOR = object : DiffUtil.ItemCallback<Vehicle>(){
+        private val DETAILS_FILMS_COMPARATOR = object : DiffUtil.ItemCallback<Vehicle>() {
             override fun areItemsTheSame(oldItem: Vehicle, newItem: Vehicle): Boolean {
                 return oldItem == newItem
             }
@@ -22,7 +24,7 @@ class DetailsVehiclesAdapter(private val onClickListener : ResourceClickListener
         }
     }
 
-    class ResourceClickListener(val clickListener: (vehicle : Vehicle) -> Unit){
+    class ResourceClickListener(val clickListener: (vehicle: Vehicle) -> Unit) {
         fun onClick(vehicle: Vehicle) {
             return when {
                 vehicle.url.isEmpty() -> {
@@ -34,8 +36,9 @@ class DetailsVehiclesAdapter(private val onClickListener : ResourceClickListener
         }
     }
 
-    class SimpleClickableTextViewHolder(private var binding : SimpleClickableTextViewBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind (vehicle: Vehicle){
+    class SimpleClickableTextViewHolder(private var binding: SimpleClickableTextViewBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(vehicle: Vehicle) {
             binding.textString = vehicle.name
             binding.executePendingBindings()
         }
@@ -45,7 +48,13 @@ class DetailsVehiclesAdapter(private val onClickListener : ResourceClickListener
         parent: ViewGroup,
         viewType: Int
     ): SimpleClickableTextViewHolder {
-        return SimpleClickableTextViewHolder(SimpleClickableTextViewBinding.inflate(LayoutInflater.from(parent.context)))
+        return SimpleClickableTextViewHolder(
+            SimpleClickableTextViewBinding.inflate(
+                LayoutInflater.from(
+                    parent.context
+                )
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: SimpleClickableTextViewHolder, position: Int) {

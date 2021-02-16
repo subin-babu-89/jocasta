@@ -11,7 +11,7 @@ import com.example.jocasta.network.model.*
 
 @Database(
     entities = [ResourceType::class,
-        People::class , PeopleRemoteKeys::class,
+        People::class, PeopleRemoteKeys::class,
         Planet::class, PlanetRemoteKeys::class,
         Film::class, FilmRemoteKeys::class,
         Species::class, SpeciesRemoteKeys::class,
@@ -23,37 +23,41 @@ import com.example.jocasta.network.model.*
 @TypeConverters(StringListConverter::class)
 abstract class JocastaDatabase : RoomDatabase() {
 
-    abstract fun resourceTypeDao() : ResourceTypeDao
+    abstract fun resourceTypeDao(): ResourceTypeDao
 
-    abstract fun peopleDao() : PeopleDao
-    abstract fun peopleRemoteKeysDao() : PeopleRemoteKeysDao
+    abstract fun peopleDao(): PeopleDao
+    abstract fun peopleRemoteKeysDao(): PeopleRemoteKeysDao
 
-    abstract fun planetDao() : PlanetDao
-    abstract fun planetRemoteKeysDao() : PlanetRemoteKeysDao
+    abstract fun planetDao(): PlanetDao
+    abstract fun planetRemoteKeysDao(): PlanetRemoteKeysDao
 
-    abstract fun filmDao() : FilmDao
-    abstract fun filmRemoteKeysDao() : FilmRemoteKeysDao
+    abstract fun filmDao(): FilmDao
+    abstract fun filmRemoteKeysDao(): FilmRemoteKeysDao
 
-    abstract fun speciesDao() : SpeciesDao
-    abstract fun speciesRemoteKeysDao() : SpeciesRemoteKeysDao
+    abstract fun speciesDao(): SpeciesDao
+    abstract fun speciesRemoteKeysDao(): SpeciesRemoteKeysDao
 
-    abstract fun vehicleDao() : VehicleDao
-    abstract fun vehicleRemoteKeysDao() : VehicleRemoteKeysDao
+    abstract fun vehicleDao(): VehicleDao
+    abstract fun vehicleRemoteKeysDao(): VehicleRemoteKeysDao
 
-    abstract fun starshipDao() : StarshipDao
-    abstract fun starshipRemoteKeysDao() : StarshipRemoteKeysDao
+    abstract fun starshipDao(): StarshipDao
+    abstract fun starshipRemoteKeysDao(): StarshipRemoteKeysDao
 
-    companion object{
+    companion object {
         @Volatile
-        private var INSTANCE : JocastaDatabase? = null
+        private var INSTANCE: JocastaDatabase? = null
 
-        fun getInstance(context: Context) : JocastaDatabase =
-            INSTANCE ?: synchronized(this){
-                INSTANCE?: buildDatabase(context).also { INSTANCE = it }
+        fun getInstance(context: Context): JocastaDatabase =
+            INSTANCE ?: synchronized(this) {
+                INSTANCE ?: buildDatabase(context).also { INSTANCE = it }
             }
 
-        private fun buildDatabase(context: Context) : JocastaDatabase{
-            return Room.databaseBuilder(context.applicationContext, JocastaDatabase::class.java, "jocasta").build()
+        private fun buildDatabase(context: Context): JocastaDatabase {
+            return Room.databaseBuilder(
+                context.applicationContext,
+                JocastaDatabase::class.java,
+                "jocasta"
+            ).build()
         }
     }
 }

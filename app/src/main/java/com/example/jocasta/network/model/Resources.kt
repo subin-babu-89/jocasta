@@ -4,7 +4,7 @@ import com.example.jocasta.db.entity.ResourceType
 import com.squareup.moshi.Json
 
 
-data class Resources (
+data class Resources(
     @Json(name = "people")
     var people: String,
 
@@ -24,7 +24,7 @@ data class Resources (
     var starships: String,
 )
 
-fun Resources.toDBDao() : List<ResourceType> {
+fun Resources.toDBDao(): List<ResourceType> {
     val resourcesList = mutableListOf<ResourceType>()
     resourcesList.add(ResourceType(resourceName = "people", resourceAPIURL = this.people))
     resourcesList.add(ResourceType(resourceName = "planets", resourceAPIURL = this.planets))

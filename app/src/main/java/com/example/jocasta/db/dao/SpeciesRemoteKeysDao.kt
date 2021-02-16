@@ -4,8 +4,6 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.jocasta.db.entity.FilmRemoteKeys
-import com.example.jocasta.db.entity.PlanetRemoteKeys
 import com.example.jocasta.db.entity.SpeciesRemoteKeys
 
 @Dao

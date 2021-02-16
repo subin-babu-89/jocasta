@@ -10,10 +10,10 @@ import com.example.jocasta.db.entity.ResourceType
 interface ResourceTypeDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(resourceTypes : List<ResourceType>)
+    suspend fun insertAll(resourceTypes: List<ResourceType>)
 
     @Query("SELECT * FROM resource_types")
-    suspend fun allResourceTypes() : List<ResourceType>
+    suspend fun allResourceTypes(): List<ResourceType>
 
     @Query("DELETE FROM resource_types")
     suspend fun clearAll()

@@ -12,10 +12,10 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface SWApiService {
-    companion object{
+    companion object {
         private const val BASE_URL = "https://swapi.dev/"
 
-        fun create() : SWApiService {
+        fun create(): SWApiService {
             val logger = HttpLoggingInterceptor()
             logger.level = HttpLoggingInterceptor.Level.BASIC
             val okHttpClient = OkHttpClient.Builder().addInterceptor(logger).build()
@@ -23,52 +23,65 @@ interface SWApiService {
             val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
 
             return Retrofit.Builder().baseUrl(BASE_URL).client(okHttpClient).addConverterFactory(
-                MoshiConverterFactory.create(moshi)).build().create(SWApiService::class.java)
+                MoshiConverterFactory.create(moshi)
+            ).build().create(SWApiService::class.java)
         }
     }
 
     @GET("api")
-    suspend fun getAllResources() : Resources
+    suspend fun getAllResources(): Resources
 
     @GET("api/{resource}")
-    suspend fun getPeopleSearchFor(@Path("resource") resourceName : String, @Query("search") query: String,
-                                   @Query("page") page : Int) : Results<People>
+    suspend fun getPeopleSearchFor(
+        @Path("resource") resourceName: String, @Query("search") query: String,
+        @Query("page") page: Int
+    ): Results<People>
 
     @GET("api/{resource}")
-    suspend fun getPlanetSearchFor(@Path("resource") resourceName : String, @Query("search") query: String,
-                                   @Query("page") page : Int) : Results<Planet>
+    suspend fun getPlanetSearchFor(
+        @Path("resource") resourceName: String, @Query("search") query: String,
+        @Query("page") page: Int
+    ): Results<Planet>
 
     @GET("api/{resource}")
-    suspend fun getFilmSearchFor(@Path("resource") resourceName : String, @Query("search") query: String,
-                                   @Query("page") page : Int) : Results<Film>
+    suspend fun getFilmSearchFor(
+        @Path("resource") resourceName: String, @Query("search") query: String,
+        @Query("page") page: Int
+    ): Results<Film>
 
     @GET("api/{resource}")
-    suspend fun getSpeciesSearchFor(@Path("resource") resourceName : String, @Query("search") query: String,
-                                 @Query("page") page : Int) : Results<Species>
+    suspend fun getSpeciesSearchFor(
+        @Path("resource") resourceName: String, @Query("search") query: String,
+        @Query("page") page: Int
+    ): Results<Species>
 
     @GET("api/{resource}")
-    suspend fun getVehicleSearchFor(@Path("resource") resourceName : String, @Query("search") query: String,
-                                    @Query("page") page : Int) : Results<Vehicle>
+    suspend fun getVehicleSearchFor(
+        @Path("resource") resourceName: String, @Query("search") query: String,
+        @Query("page") page: Int
+    ): Results<Vehicle>
 
     @GET("api/{resource}")
-    suspend fun getStarshipSearchFor(@Path("resource") resourceName : String, @Query("search") query: String,
-                                    @Query("page") page : Int) : Results<Starship>
+    suspend fun getStarshipSearchFor(
+        @Path("resource") resourceName: String, @Query("search") query: String,
+        @Query("page") page: Int
+    ): Results<Starship>
 
     @GET("api/films/{id}")
-    suspend fun getFilmForId(@Path("id") id : String) : Film
+    suspend fun getFilmForId(@Path("id") id: String): Film
 
     @GET("api/species/{id}")
-    suspend fun getSpeciesForId(@Path("id") id : String) : Species
+    suspend fun getSpeciesForId(@Path("id") id: String): Species
 
     @GET("api/vehicles/{id}")
-    suspend fun getVehiclesForId(@Path("id") id : String) : Vehicle
+    suspend fun getVehiclesForId(@Path("id") id: String): Vehicle
 
     @GET("api/starships/{id}")
-    suspend fun getStarshipForId(@Path("id") id : String) : Starship
+    suspend fun getStarshipForId(@Path("id") id: String): Starship
 
     @GET("api/people/{id}")
-    suspend fun getPeopleForId(@Path("id") id : String) : People
+    suspend fun getPeopleForId(@Path("id") id: String): People
 
     @GET("api/planets/{id}")
-    suspend fun getPlanetForId(@Path("id") id : String) : Planet
+    suspend fun getPlanetForId(@Path("id") id: String): Planet
 }
