@@ -64,7 +64,7 @@ class FilmDetailFragment : Fragment() {
         })
 
         viewModel.planets.observe(viewLifecycleOwner, {
-            val adapter = binding.peopleList.adapter as DetailsPlanetAdapter
+            val adapter = binding.planetList.adapter as DetailsPlanetAdapter
             adapter.submitList(null)
             adapter.submitList(it)
         })
@@ -75,7 +75,7 @@ class FilmDetailFragment : Fragment() {
         })
 
         viewModel.starships.observe(viewLifecycleOwner, {
-            val adapter = binding.peopleList.adapter as DetailsStarshipAdapter
+            val adapter = binding.starshipList.adapter as DetailsStarshipAdapter
             adapter.submitList(null)
             adapter.submitList(it)
         })
@@ -86,7 +86,7 @@ class FilmDetailFragment : Fragment() {
         })
 
         viewModel.vehicles.observe(viewLifecycleOwner, {
-            val adapter = binding.peopleList.adapter as DetailsVehiclesAdapter
+            val adapter = binding.vehiclesList.adapter as DetailsVehiclesAdapter
             adapter.submitList(null)
             adapter.submitList(it)
         })
@@ -97,7 +97,7 @@ class FilmDetailFragment : Fragment() {
         })
 
         viewModel.species.observe(viewLifecycleOwner, {
-            val adapter = binding.peopleList.adapter as DetailsSpeciesAdapter
+            val adapter = binding.speciesList.adapter as DetailsSpeciesAdapter
             adapter.submitList(null)
             adapter.submitList(it)
         })

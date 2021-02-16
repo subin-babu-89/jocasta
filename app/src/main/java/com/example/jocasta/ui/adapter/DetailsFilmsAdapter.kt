@@ -22,7 +22,15 @@ class DetailsFilmsAdapter(private val onClickListener : ResourceClickListener) :
     }
 
     class ResourceClickListener(val clickListener: (film: Film) -> Unit){
-        fun onClick(film: Film) = clickListener(film)
+        fun onClick(film: Film) {
+            return when {
+                film.url.isEmpty() -> {
+                }
+                else -> {
+                    clickListener(film)
+                }
+            }
+        }
     }
 
     class SimpleClickableTextViewHolder(private var binding : SimpleClickableTextViewBinding) : RecyclerView.ViewHolder(binding.root) {

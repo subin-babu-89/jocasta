@@ -13,46 +13,46 @@ data class Film(
     var peopleID : Long = 0L,
 
     @Json(name = "title")
-    override var title: String?,
+    override var title: String? = "",
 
     @Json(name = "episode_id")
-    var episodeId: Int,
+    var episodeId: Int = 0,
 
     @Json(name = "opening_crawl")
-    var openingCrawl: String,
+    var openingCrawl: String = "",
 
     @Json(name = "director")
-    var director: String,
+    var director: String = "",
 
     @Json(name = "producer")
-    var producer: String,
+    var producer: String = "",
 
     @Json(name = "release_date")
-    var releaseDate: String,
+    var releaseDate: String = "",
 
     @Json(name = "characters")
-    var characters: List<String>,
+    var characters: List<String> = listOf(),
 
     @Json(name = "planets")
-    var planets: List<String>,
+    var planets: List<String> = listOf(),
 
     @Json(name = "starships")
-    var starships: List<String>,
+    var starships: List<String> = listOf(),
 
     @Json(name = "vehicles")
-    var vehicles: List<String>,
+    var vehicles: List<String> = listOf(),
 
     @Json(name = "species")
-    var species: List<String>,
+    var species: List<String> = listOf(),
 
     @Json(name = "created")
-    var created: String,
+    var created: String = "",
 
     @Json(name = "edited")
-    var edited: String,
+    var edited: String = "",
 
     @Json(name = "url")
-    override var url: String,
+    override var url: String = "",
 
     override var name: String?
 ) : Parcelable, AbstractResource()

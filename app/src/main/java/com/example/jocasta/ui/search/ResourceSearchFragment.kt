@@ -70,7 +70,7 @@ class ResourceSearchFragment : Fragment() {
         binding.viewModel = viewModel
 
         binding.resultsList.layoutManager = LinearLayoutManager(requireContext())
-        binding.resultsList.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
+//        binding.resultsList.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
 
         initAdapter()
         val query = savedInstanceState?.getString(LAST_SEARCH_QUERY)?: DEFAULT_QUERY

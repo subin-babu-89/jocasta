@@ -9,8 +9,6 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.jocasta.R
-import com.example.jocasta.databinding.PeopleViewItemBinding
-import com.example.jocasta.db.entity.ResourceType
 import com.example.jocasta.network.model.*
 import com.example.jocasta.ui.search.ResourceSearchFragmentDirections
 import timber.log.Timber
@@ -71,7 +69,7 @@ class ResourceSearchAdapter : PagingDataAdapter<AbstractResource, ResourceSearch
 
         companion object{
             fun create(parent: ViewGroup) : ResourceSearchViewHolder{
-                val view = LayoutInflater.from(parent.context).inflate(R.layout.people_view_item, parent, false)
+                val view = LayoutInflater.from(parent.context).inflate(R.layout.resource_view_item, parent, false)
                 return ResourceSearchViewHolder(view)
             }
         }

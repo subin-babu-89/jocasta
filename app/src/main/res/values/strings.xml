@@ -7,4 +7,13 @@
     <string name="sw_api">SW API</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="resource_urls">
+        <item>https://denver.cbslocal.com/wp-content/uploads/sites/15909806/2015/10/capture2.jpg</item>
+        <item>https://static.wikia.nocookie.net/starwars/images/e/ee/Iego.jpg</item>
+        <item>https://static.wikia.nocookie.net/starwars/images/e/e2/Sw_dvd%27s.JPG</item>
+        <item>https://static.wikia.nocookie.net/starwars/images/3/3e/Herglic_with_aliens.JPG</item>
+        <item>https://icons.iconarchive.com/icons/jonathan-rey/star-wars-vehicles/icons-390.jpg</item>
+        <item>https://static.wikia.nocookie.net/starwars/images/5/5b/Fighters_PotJ.jpg</item>
+    </string-array>
 </resources>

@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.jocasta.databinding.SimpleClickableTextViewBinding
+import com.example.jocasta.network.model.Film
 import com.example.jocasta.network.model.People
 
 class DetailsPeopleAdapter(private val onClickListener : ResourceClickListener) : ListAdapter<People, DetailsPeopleAdapter.SimpleClickableTextViewHolder>(DETAILS_FILMS_COMPARATOR){
@@ -22,7 +23,15 @@ class DetailsPeopleAdapter(private val onClickListener : ResourceClickListener) 
     }
 
     class ResourceClickListener(val clickListener: (people : People) -> Unit){
-        fun onClick(people: People) = clickListener(people)
+        fun onClick(people: People) {
+            return when {
+                people.url.isEmpty() -> {
+                }
+                else -> {
+                    clickListener(people)
+                }
+            }
+        }
     }
 
     class SimpleClickableTextViewHolder(private var binding : SimpleClickableTextViewBinding) : RecyclerView.ViewHolder(binding.root) {

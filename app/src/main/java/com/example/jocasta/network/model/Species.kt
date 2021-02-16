@@ -13,50 +13,50 @@ data class Species(
     var peopleID : Long = 0L,
 
     @Json(name = "name")
-    override var name: String?,
+    override var name: String? = "",
 
     @Json(name = "classification")
-    var classification: String,
+    var classification: String = "",
 
     @Json(name = "designation")
-    var designation: String,
+    var designation: String = "",
 
     @Json(name = "average_height")
-    var averageHeight: String,
+    var averageHeight: String = "",
 
     @Json(name = "skin_colors")
-    var skinColors: String,
+    var skinColors: String = "",
 
     @Json(name = "hair_colors")
-    var hairColors: String,
+    var hairColors: String = "",
 
     @Json(name = "eye_colors")
-    var eyeColors: String,
+    var eyeColors: String = "",
 
     @Json(name = "average_lifespan")
-    var averageLifespan: String,
+    var averageLifespan: String = "",
 
     @Json(name = "homeworld")
     var homeworld: String? = null,
 
     @Json(name = "language")
-    var language: String,
+    var language: String = "",
 
     @Json(name = "people")
-    var people: List<String>,
+    var people: List<String> = listOf(),
 
     @Json(name = "films")
-    var films: List<String>,
+    var films: List<String> = listOf(),
 
     @Json(name = "created")
-    var created: String,
+    var created: String = "",
 
     @Json(name = "edited")
-    var edited: String,
+    var edited: String = "",
 
     @Json(name = "url")
-    override var url: String,
+    override var url: String = "",
 
-    override var title: String?
+    override var title: String?=""
 ) : Parcelable, AbstractResource()
 

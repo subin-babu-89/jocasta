@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.jocasta.databinding.SimpleClickableTextViewBinding
+import com.example.jocasta.network.model.Film
 import com.example.jocasta.network.model.Planet
 
 class DetailsPlanetAdapter(private val onClickListener : ResourceClickListener) : ListAdapter<Planet, DetailsPlanetAdapter.SimpleClickableTextViewHolder>(DETAILS_FILMS_COMPARATOR){
@@ -22,7 +23,15 @@ class DetailsPlanetAdapter(private val onClickListener : ResourceClickListener) 
     }
 
     class ResourceClickListener(val clickListener: (planet : Planet) -> Unit){
-        fun onClick(planet: Planet) = clickListener(planet)
+        fun onClick(planet: Planet) {
+            return when {
+                planet.url.isEmpty() -> {
+                }
+                else -> {
+                    clickListener(planet)
+                }
+            }
+        }
     }
 
     class SimpleClickableTextViewHolder(private var binding : SimpleClickableTextViewBinding) : RecyclerView.ViewHolder(binding.root) {

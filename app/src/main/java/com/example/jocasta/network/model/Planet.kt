@@ -13,46 +13,46 @@ data class Planet(
     var peopleID : Long = 0L,
 
     @property:Json(name = "name")
-    override var name: String?,
+    override var name: String? = "",
 
     @property:Json(name = "rotation_period")
-    var rotationPeriod: String,
+    var rotationPeriod: String = "",
 
     @property:Json(name = "orbital_period")
-    var orbitalPeriod: String,
+    var orbitalPeriod: String = "",
 
     @property:Json(name = "diameter")
-    var diameter: String,
+    var diameter: String = "",
 
     @property:Json(name = "climate")
-    var climate: String,
+    var climate: String = "",
 
     @property:Json(name = "gravity")
-    var gravity: String,
+    var gravity: String = "",
 
     @property:Json(name = "terrain")
-    var terrain: String,
+    var terrain: String = "",
 
     @property:Json(name = "surface_water")
-    var surfaceWater: String,
+    var surfaceWater: String = "",
 
     @property:Json(name = "population")
-    var population: String,
+    var population: String = "",
 
     @property:Json(name = "residents")
-    var residents: List<String>,
+    var residents: List<String> = listOf(),
 
     @property:Json(name = "films")
-    var films: List<String>,
+    var films: List<String> = listOf(),
 
     @property:Json(name = "created")
-    var created: String,
+    var created: String = "",
 
     @property:Json(name = "edited")
-    var edited: String,
+    var edited: String = "",
 
     @property:Json(name = "url")
-    override var url: String,
+    override var url: String = "",
 
-    override var title: String?
+    override var title: String? = ""
 ) : Parcelable, AbstractResource()
