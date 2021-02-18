@@ -6,6 +6,9 @@ import androidx.room.PrimaryKey
 import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
 
+/**
+ * Network model & Entity (table) for Species resource
+ */
 @Parcelize
 @Entity(tableName = "species")
 data class Species(

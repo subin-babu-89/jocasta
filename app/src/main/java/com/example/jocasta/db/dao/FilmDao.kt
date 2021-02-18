@@ -7,6 +7,9 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.jocasta.network.model.Film
 
+/**
+ * Room DAO for film resource type in the app
+ */
 @Dao
 interface FilmDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)

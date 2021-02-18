@@ -6,6 +6,9 @@ import androidx.room.PrimaryKey
 import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
 
+/**
+ * Network model & Entity (table) for Film resource
+ */
 @Parcelize
 @Entity(tableName = "films")
 data class Film(

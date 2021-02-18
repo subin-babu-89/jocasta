@@ -12,10 +12,7 @@ import com.example.jocasta.db.JocastaDatabase
 import com.example.jocasta.network.SWApiService
 import com.example.jocasta.network.model.People
 import com.example.jocasta.repository.ResourceRepository
-import com.example.jocasta.ui.adapter.DetailsFilmsAdapter
-import com.example.jocasta.ui.adapter.DetailsSpeciesAdapter
-import com.example.jocasta.ui.adapter.DetailsStarshipAdapter
-import com.example.jocasta.ui.adapter.DetailsVehiclesAdapter
+import com.example.jocasta.ui.adapter.*
 
 
 class PeopleDetailFragment : Fragment() {
@@ -73,6 +70,12 @@ class PeopleDetailFragment : Fragment() {
                 findNavController().navigate(action)
             })
 
+        binding.personHomeworld.adapter =
+            DetailsPlanetAdapter(DetailsPlanetAdapter.ResourceClickListener {
+                val action = PeopleDetailFragmentDirections.peopleToPlanetDetail(it)
+                findNavController().navigate(action)
+            })
+
         viewModel.films.observe(viewLifecycleOwner, {
             val adapter = binding.recyclerView.adapter as DetailsFilmsAdapter
             adapter.submitList(null)
@@ -96,6 +99,13 @@ class PeopleDetailFragment : Fragment() {
             adapter.submitList(null)
             adapter.submitList(it)
         })
+
+        viewModel.planets.observe(viewLifecycleOwner, {
+            val adapter = binding.personHomeworld.adapter as DetailsPlanetAdapter
+            adapter.submitList(null)
+            adapter.submitList(it)
+        })
+
         return binding.root
     }
 

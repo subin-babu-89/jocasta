@@ -7,6 +7,9 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.jocasta.network.model.People
 
+/**
+ * Room DAO for people resource type in the app
+ */
 @Dao
 interface PeopleDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)

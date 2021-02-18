@@ -1,12 +1,15 @@
 package com.example.jocasta.repository
 
 import androidx.paging.*
-import com.example.jocasta.db.JocastaDatabase
+import com.example.jocasta.db.*
 import com.example.jocasta.network.SWApiService
 import com.example.jocasta.network.model.*
 import com.example.jocasta.repository.mediator.*
 import kotlinx.coroutines.flow.Flow
 
+/**
+ * Repository for the resource fetched from SWapi
+ */
 @Suppress("UNCHECKED_CAST")
 class ResourceRepository(private val service: SWApiService, private val database: JocastaDatabase) {
 
@@ -14,6 +17,9 @@ class ResourceRepository(private val service: SWApiService, private val database
         const val NETWORK_PAGE_SIZE = 5
     }
 
+    /**
+     * Request paging data from DB or mediate from an online resource.
+     */
     @OptIn(ExperimentalPagingApi::class)
     fun <T : AbstractResource> getSearchResults(
         resourceType: String,
@@ -45,32 +51,32 @@ class ResourceRepository(private val service: SWApiService, private val database
         dbQuery: String
     ): () -> PagingSource<Int, AbstractResource> {
         return when (resourceType) {
-            "people" -> {
+            PEOPLE -> {
                 {
                     database.peopleDao().elementsByName(dbQuery)
                 } as () -> PagingSource<Int, AbstractResource>
             }
-            "planets" -> {
+            PLANETS -> {
                 {
                     database.planetDao().elementsByName(dbQuery)
                 } as () -> PagingSource<Int, AbstractResource>
             }
-            "films" -> {
+            FILMS -> {
                 {
                     database.filmDao().elementsByName(dbQuery)
                 } as () -> PagingSource<Int, AbstractResource>
             }
-            "species" -> {
+            SPECIES -> {
                 {
                     database.speciesDao().elementsByName(dbQuery)
                 } as () -> PagingSource<Int, AbstractResource>
             }
-            "vehicles" -> {
+            VEHICLES -> {
                 {
                     database.vehicleDao().elementsByName(dbQuery)
                 } as () -> PagingSource<Int, AbstractResource>
             }
-            "starships" -> {
+            STARSHIPS -> {
                 {
                     database.starshipDao().elementsByName(dbQuery)
                 } as () -> PagingSource<Int, AbstractResource>
@@ -91,7 +97,7 @@ class ResourceRepository(private val service: SWApiService, private val database
         database: JocastaDatabase
     ): RemoteMediator<Int, AbstractResource> {
         return when (resourceType) {
-            "people" -> {
+            PEOPLE -> {
                 PeopleRemoteMediator(
                     resourceType,
                     query,
@@ -99,7 +105,7 @@ class ResourceRepository(private val service: SWApiService, private val database
                     database
                 ) as RemoteMediator<Int, AbstractResource>
             }
-            "planets" -> {
+            PLANETS -> {
                 PlanetRemoteMediator(
                     resourceType,
                     query,
@@ -107,7 +113,7 @@ class ResourceRepository(private val service: SWApiService, private val database
                     database
                 ) as RemoteMediator<Int, AbstractResource>
             }
-            "films" -> {
+            FILMS -> {
                 FilmRemoteMediator(
                     resourceType,
                     query,
@@ -115,7 +121,7 @@ class ResourceRepository(private val service: SWApiService, private val database
                     database
                 ) as RemoteMediator<Int, AbstractResource>
             }
-            "species" -> {
+            SPECIES -> {
                 SpeciesRemoteMediator(
                     resourceType,
                     query,
@@ -123,7 +129,7 @@ class ResourceRepository(private val service: SWApiService, private val database
                     database
                 ) as RemoteMediator<Int, AbstractResource>
             }
-            "vehicles" -> {
+            VEHICLES -> {
                 VehicleRemoteMediator(
                     resourceType,
                     query,
@@ -131,7 +137,7 @@ class ResourceRepository(private val service: SWApiService, private val database
                     database
                 ) as RemoteMediator<Int, AbstractResource>
             }
-            "starships" -> {
+            STARSHIPS -> {
                 StarshipRemoteMediator(
                     resourceType,
                     query,
@@ -150,6 +156,11 @@ class ResourceRepository(private val service: SWApiService, private val database
         }
     }
 
+    /**
+     * get film detail for film with filmUrl
+     *
+     * @param filmUrl url for the film
+     */
     suspend fun getFilmFor(filmUrl: String): Film {
         if (database.filmDao().filmByURL(filmUrl).isNullOrEmpty()) {
             val id = filmUrl.split("/")[5]
@@ -159,6 +170,11 @@ class ResourceRepository(private val service: SWApiService, private val database
         return database.filmDao().filmByURL(filmUrl)[0]
     }
 
+    /**
+     * get planet detail for planet with planetUrl
+     *
+     * @param planetUrl url for the planet
+     */
     suspend fun getPlanetFor(planetUrl: String): Planet {
         if (database.filmDao().filmByURL(planetUrl).isNullOrEmpty()) {
             val id = planetUrl.split("/")[5]
@@ -168,6 +184,11 @@ class ResourceRepository(private val service: SWApiService, private val database
         return database.planetDao().elementByUrl(planetUrl)[0]
     }
 
+    /**
+     * get species detail for species with speciesUrl
+     *
+     * @param speciesUrl url for the species
+     */
     suspend fun getSpeciesFor(speciesUrl: String): Species {
         if (database.speciesDao().elementByURl(speciesUrl).isNullOrEmpty()) {
             val id = speciesUrl.split("/")[5]
@@ -177,6 +198,11 @@ class ResourceRepository(private val service: SWApiService, private val database
         return database.speciesDao().elementByURl(speciesUrl)[0]
     }
 
+    /**
+     * get vehicle detail for vehicle with vehicleUrl
+     *
+     * @param vehicleUrl url for the vehicle
+     */
     suspend fun getVehicleFor(vehicleUrl: String): Vehicle {
         if (database.vehicleDao().elementByURl(vehicleUrl).isNullOrEmpty()) {
             val id = vehicleUrl.split("/")[5]
@@ -186,6 +212,11 @@ class ResourceRepository(private val service: SWApiService, private val database
         return database.vehicleDao().elementByURl(vehicleUrl)[0]
     }
 
+    /**
+     * get starship detail for starship with starshipUrl
+     *
+     * @param starshipUrl url for the starship
+     */
     suspend fun getStarshipFor(starshipUrl: String): Starship {
         if (database.starshipDao().elementByURl(starshipUrl).isNullOrEmpty()) {
             val id = starshipUrl.split("/")[5]
@@ -195,6 +226,11 @@ class ResourceRepository(private val service: SWApiService, private val database
         return database.starshipDao().elementByURl(starshipUrl)[0]
     }
 
+    /**
+     * get people detail for people(person) with people(person)Url
+     *
+     * @param peopleUrl url for the person(people)
+     */
     suspend fun getPeopleFor(peopleUrl: String): People {
         if (database.peopleDao().elementByURl(peopleUrl).isNullOrEmpty()) {
             val id = peopleUrl.split("/")[5]

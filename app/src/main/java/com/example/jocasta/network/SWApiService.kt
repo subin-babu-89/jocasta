@@ -11,6 +11,9 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
+/**
+ * Networking interface using retrofit to call remote APIs
+ */
 interface SWApiService {
     companion object {
         private const val BASE_URL = "https://swapi.dev/"

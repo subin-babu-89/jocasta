@@ -6,6 +6,9 @@ import androidx.room.PrimaryKey
 import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
 
+/**
+ * Network model & Entity (table) for Starship resource
+ */
 @Parcelize
 @Entity(tableName = "starship")
 data class Starship(

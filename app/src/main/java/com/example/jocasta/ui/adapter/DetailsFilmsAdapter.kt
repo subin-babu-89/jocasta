@@ -8,6 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.jocasta.databinding.SimpleClickableTextViewBinding
 import com.example.jocasta.network.model.Film
 
+/**
+ *
+ */
 class DetailsFilmsAdapter(private val onClickListener: ResourceClickListener) :
     ListAdapter<Film, DetailsFilmsAdapter.SimpleClickableTextViewHolder>(DETAILS_FILMS_COMPARATOR) {
     companion object {

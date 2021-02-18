@@ -6,6 +6,9 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.jocasta.db.entity.SpeciesRemoteKeys
 
+/**
+ * Room DAO for remote keys for species resource paging in the app
+ */
 @Dao
 interface SpeciesRemoteKeysDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)

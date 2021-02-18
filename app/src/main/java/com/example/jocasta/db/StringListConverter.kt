@@ -5,6 +5,9 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.lang.reflect.Type
 
+/**
+ * Type converter used for storing list into a room sqlite database
+ */
 class StringListConverter {
     @TypeConverter
     fun fromString(value: String?): List<String?>? {

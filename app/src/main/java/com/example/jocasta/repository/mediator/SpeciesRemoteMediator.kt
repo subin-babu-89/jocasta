@@ -22,6 +22,7 @@ class SpeciesRemoteMediator(
     private val service: SWApiService,
     private val database: JocastaDatabase
 ) : RemoteMediator<Int, Species>() {
+
     override suspend fun load(
         loadType: LoadType,
         state: PagingState<Int, Species>

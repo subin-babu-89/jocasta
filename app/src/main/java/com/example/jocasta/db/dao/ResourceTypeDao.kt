@@ -6,6 +6,9 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.jocasta.db.entity.ResourceType
 
+/**
+ * Room DAO for resource types paging in the app
+ */
 @Dao
 interface ResourceTypeDao {
 

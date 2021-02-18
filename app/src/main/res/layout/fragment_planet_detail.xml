@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -25,145 +25,118 @@
             tools:context=".ui.MainActivity">
 
             <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:id="@+id/planetName"
                 android:text="@{planet.name}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                style="@style/DetailTitleBold"
                 tools:text="Luke Skywalker" />
 
             <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="@{planet.rotationPeriod}"
+                android:id="@+id/rotationPeriod"
+                android:text="@{@string/planet_rotation_period(planet.rotationPeriod)}"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView"
+                app:layout_constraintTop_toBottomOf="@+id/planetName"
+                style="@style/DetailTextDefault"
                 tools:text="172" />
 
             <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="@{planet.orbitalPeriod}"
+                android:id="@+id/orbitalPeriod"
+                android:text="@{@string/planet_orbital_period(planet.orbitalPeriod)}"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView2"
+                app:layout_constraintTop_toBottomOf="@+id/rotationPeriod"
+                style="@style/DetailTextDefault"
                 tools:text="77" />
 
             <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="@{planet.diameter}"
+                android:id="@+id/diameter"
+                android:text="@{@string/planet_diameter(planet.diameter)}"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView3"
+                app:layout_constraintTop_toBottomOf="@+id/orbitalPeriod"
+                style="@style/DetailTextDefault"
                 tools:text="blond" />
 
             <TextView
-                android:id="@+id/textView5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="@{planet.climate}"
+                android:id="@+id/climate"
+                android:text="@{@string/planet_climate(planet.climate)}"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView4"
+                app:layout_constraintTop_toBottomOf="@+id/diameter"
+                style="@style/DetailTextDefault"
                 tools:text="fair" />
 
             <TextView
-                android:id="@+id/textView6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="@{planet.gravity}"
+                android:id="@+id/gravity"
+                android:text="@{@string/planet_gravity(planet.gravity)}"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView5"
+                app:layout_constraintTop_toBottomOf="@+id/climate"
+                style="@style/DetailTextDefault"
                 tools:text="blue" />
 
             <TextView
-                android:id="@+id/textView7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="@{planet.terrain}"
+                android:id="@+id/terrain"
+                android:text="@{@string/planet_terrain(planet.terrain)}"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView6"
+                app:layout_constraintTop_toBottomOf="@+id/gravity"
+                style="@style/DetailTextDefault"
                 tools:text="19BBY" />
 
             <TextView
-                android:id="@+id/textView8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="@{planet.surfaceWater}"
+                android:id="@+id/surfaceWater"
+                android:text="@{@string/planet_surface_water(planet.surfaceWater)}"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView7" />
+                app:layout_constraintTop_toBottomOf="@+id/terrain"
+                style="@style/DetailTextDefault"/>
 
             <TextView
-                android:id="@+id/textView9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="@{planet.population}"
+                android:id="@+id/population"
+                android:text="@{@string/planet_population(planet.population)}"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView8" />
+                app:layout_constraintTop_toBottomOf="@+id/surfaceWater"
+                style="@style/DetailTextDefault"/>
+
+            <TextView
+                android:id="@+id/residents"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/population"
+                android:text="@string/detail_residents"
+                style="@style/DetailsListHeaderTitle"/>
 
             <View
                 android:id="@+id/divider1"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_margin="16dp"
-                android:background="@android:color/darker_gray"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView9" />
+                app:layout_constraintTop_toBottomOf="@+id/residents"
+                style="@style/DetailPageDivider" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/peopleList"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/divider1"
                 app:listPeopleOnPlanet="@{planet.residents}"
                 app:vM="@{viewModel}"
-                tools:listitem="@layout/simple_clickable_text_view" />
+                style="@style/DetailsListStyle"/>
+
+            <TextView
+                android:id="@+id/films"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/peopleList"
+                android:text="@string/detail_films"
+                style="@style/DetailsListHeaderTitle"/>
 
             <View
                 android:id="@+id/divider2"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_margin="16dp"
-                android:background="@android:color/darker_gray"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/peopleList" />
+                app:layout_constraintTop_toBottomOf="@+id/films"
+                style="@style/DetailPageDivider"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/filmList"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/divider2"
                 app:listFilmsOnPlanet="@{planet.films}"
                 app:vM="@{viewModel}"
-                tools:listitem="@layout/simple_clickable_text_view" />
+                style="@style/DetailsListStyle"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </layout>

@@ -7,6 +7,9 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.jocasta.network.model.Species
 
+/**
+ * Room DAO for species resource type in the app
+ */
 @Dao
 interface SpeciesDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)

@@ -6,6 +6,9 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.jocasta.db.entity.FilmRemoteKeys
 
+/**
+ * Room DAO for remote keys for film resource paging in the app
+ */
 @Dao
 interface FilmRemoteKeysDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)

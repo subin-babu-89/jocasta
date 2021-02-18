@@ -22,6 +22,7 @@ class VehicleRemoteMediator(
     private val service: SWApiService,
     private val database: JocastaDatabase
 ) : RemoteMediator<Int, Vehicle>() {
+
     override suspend fun load(
         loadType: LoadType,
         state: PagingState<Int, Vehicle>

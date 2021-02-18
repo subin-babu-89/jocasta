@@ -6,6 +6,9 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.jocasta.db.entity.StarshipRemoteKeys
 
+/**
+ * Room DAO for remote keys for starship resource paging in the app
+ */
 @Dao
 interface StarshipRemoteKeysDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)

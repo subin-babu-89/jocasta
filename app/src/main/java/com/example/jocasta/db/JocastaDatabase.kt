@@ -9,6 +9,9 @@ import com.example.jocasta.db.dao.*
 import com.example.jocasta.db.entity.*
 import com.example.jocasta.network.model.*
 
+/**
+ * Room database for the app
+ */
 @Database(
     entities = [ResourceType::class,
         People::class, PeopleRemoteKeys::class,

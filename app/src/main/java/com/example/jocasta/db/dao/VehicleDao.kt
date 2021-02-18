@@ -7,6 +7,9 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.jocasta.network.model.Vehicle
 
+/**
+ * Room DAO for vehicle resource type in the app
+ */
 @Dao
 interface VehicleDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)

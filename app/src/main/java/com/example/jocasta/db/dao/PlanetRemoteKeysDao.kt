@@ -6,6 +6,9 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.jocasta.db.entity.PlanetRemoteKeys
 
+/**
+ * Room DAO for remote keys for planet resource paging in the app
+ */
 @Dao
 interface PlanetRemoteKeysDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)

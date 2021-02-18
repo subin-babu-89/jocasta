@@ -14,6 +14,7 @@ import com.example.jocasta.network.model.Species
 import com.example.jocasta.repository.ResourceRepository
 import com.example.jocasta.ui.adapter.DetailsFilmsAdapter
 import com.example.jocasta.ui.adapter.DetailsPeopleAdapter
+import com.example.jocasta.ui.adapter.DetailsPlanetAdapter
 
 class SpeciesDetailFragment : Fragment() {
 
@@ -66,6 +67,18 @@ class SpeciesDetailFragment : Fragment() {
 
         viewModel.films.observe(viewLifecycleOwner, {
             val adapter = binding.filmsList.adapter as DetailsFilmsAdapter
+            adapter.submitList(null)
+            adapter.submitList(it)
+        })
+
+        binding.homeWorld.adapter =
+            DetailsPlanetAdapter(DetailsPlanetAdapter.ResourceClickListener {
+                val action = SpeciesDetailFragmentDirections.speciesDetailToPlanetDetail(it)
+                findNavController().navigate(action)
+            })
+
+        viewModel.planets.observe(viewLifecycleOwner, {
+            val adapter = binding.homeWorld.adapter as DetailsPlanetAdapter
             adapter.submitList(null)
             adapter.submitList(it)
         })

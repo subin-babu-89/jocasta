@@ -31,8 +31,8 @@ class ResourcesViewModel(private val repository: ResourceListRepository) : ViewM
     val resources: LiveData<List<ResourceType>>
         get() = _resources
 
-    private val _navigateToSelectedResourceType = MutableLiveData<ResourceType>()
-    val navigateToSelectedResourceType: LiveData<ResourceType>
+    private val _navigateToSelectedResourceType = MutableLiveData<ResourceType?>()
+    val navigateToSelectedResourceType: MutableLiveData<ResourceType?>
         get() = _navigateToSelectedResourceType
 
     init {

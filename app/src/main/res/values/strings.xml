@@ -1,13 +1,10 @@
 <resources>
     <string name="app_name">Jocasta</string>
-    <string name="title_item_detail">Item Detail</string>
-    <string name="title_item_list">Items</string>
     <string name="resource_image">Resource Image</string>
     <string name="retry">Retry</string>
     <string name="sw_api">SW API</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!-- Resource URLs for images on the launching grid view -->
     <string-array name="resource_urls">
         <item>https://denver.cbslocal.com/wp-content/uploads/sites/15909806/2015/10/capture2.jpg</item>
         <item>https://static.wikia.nocookie.net/starwars/images/e/ee/Iego.jpg</item>
@@ -16,4 +13,64 @@
         <item>https://icons.iconarchive.com/icons/jonathan-rey/star-wars-vehicles/icons-390.jpg</item>
         <item>https://static.wikia.nocookie.net/starwars/images/5/5b/Fighters_PotJ.jpg</item>
     </string-array>
+
+    <!-- Film Details Page labels -->
+    <string name="film_title">Title : %s</string>
+    <string name="film_episode_id">Episode : %d</string>
+    <string name="film_director">Director : %s</string>
+    <string name="film_producer">Producer : %s</string>
+    <string name="film_release">Release Date : %s</string>
+
+    <!-- People Details Page labels -->
+    <string name="people_height">Height : %scm</string>
+    <string name="people_weight">Weight : %skg</string>
+    <string name="people_hair_color">Hair color : %s</string>
+    <string name="people_skin_color">Skin color : %s</string>
+    <string name="people_eye_color">Eye color : %s</string>
+    <string name="people_birth_year">Birth year : %s</string>
+    <string name="people_gender">Gender : %s</string>
+
+    <!-- Planet Details Page labels -->
+    <string name="planet_rotation_period">Population : %s</string>
+    <string name="planet_orbital_period">Orbital Period : %s</string>
+    <string name="planet_diameter">Diameter : %s</string>
+    <string name="planet_climate">Climate : %s</string>
+    <string name="planet_gravity">Gravity : %s</string>
+    <string name="planet_terrain">Terrain : %s</string>
+    <string name="planet_surface_water">Surface Water : %s</string>
+    <string name="planet_population">Population : %s</string>
+
+    <!-- General Details Page labels -->
+    <string name="detail_characters">Characters</string>
+    <string name="detail_planets">Planets</string>
+    <string name="detail_starships">Starships</string>
+    <string name="detail_vehicles">Vehicles</string>
+    <string name="detail_species">Species</string>
+    <string name="detail_residents">Residents</string>
+    <string name="detail_films">Films</string>
+    <string name="detail_people">People</string>
+    <string name="detail_pilots">Pilots</string>
+
+    <!-- Species Details Page labels -->
+    <string name="species_classification">Classification : %s</string>
+    <string name="species_designation">Designation : %s</string>
+    <string name="species_average_height">Avg Height : %s</string>
+    <string name="species_skin_colors">Skin Colors : %s</string>
+    <string name="species_hair_colors">Hair Colors : %s</string>
+    <string name="species_eye_colors">Eye colors : %s</string>
+    <string name="species_average_lifespan">Avg Lifespan : %s</string>
+    <string name="species_language">Language : %s</string>
+
+    <!-- Vehicle Details Page labels -->
+    <string name="vehicle_model">Model : %s</string>
+    <string name="vehicle_manufacturer">Manufacturer : %s</string>
+    <string name="vehicle_cost_in_credits">Cost in credits : %s</string>
+    <string name="vehicle_length">Length : %s</string>
+    <string name="vehicle_max_atmospheric_speed">Max Atm. Speed : %s</string>
+    <string name="vehicle_crew">Crew : %s</string>
+    <string name="vehicle_passengers">Passengers : %s</string>
+    <string name="vehicle_cargo_capacity">Cargo Capacity : %s</string>
+    <string name="vehicle_consumables">Consumables : %s</string>
+    <string name="vehicle_class">Class : %s</string>
+    <string name="status_image_for_network_response">Status image for network response</string>
 </resources>

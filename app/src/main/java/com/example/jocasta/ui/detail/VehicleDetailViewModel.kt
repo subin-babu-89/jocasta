@@ -3,6 +3,7 @@ package com.example.jocasta.ui.detail
 import androidx.lifecycle.*
 import com.example.jocasta.network.model.Film
 import com.example.jocasta.network.model.People
+import com.example.jocasta.network.model.Planet
 import com.example.jocasta.repository.ResourceRepository
 import kotlinx.coroutines.launch
 import timber.log.Timber

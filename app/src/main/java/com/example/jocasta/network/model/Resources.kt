@@ -3,7 +3,9 @@ package com.example.jocasta.network.model
 import com.example.jocasta.db.entity.ResourceType
 import com.squareup.moshi.Json
 
-
+/**
+ * Network model for Supported resource types. This return all the apis supported by SWapi
+ */
 data class Resources(
     @Json(name = "people")
     var people: String,

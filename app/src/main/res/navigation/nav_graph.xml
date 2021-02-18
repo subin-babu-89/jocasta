@@ -42,6 +42,7 @@
             android:id="@+id/navigateToStarshipDetail"
             app:destination="@id/starshipDetailFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/peopleDetailFragment"
         android:name="com.example.jocasta.ui.detail.PeopleDetailFragment"
@@ -62,7 +63,11 @@
         <action
             android:id="@+id/peopleDetailToStarShip"
             app:destination="@id/starshipDetailFragment" />
+        <action
+            android:id="@+id/peopleToPlanetDetail"
+            app:destination="@id/planetDetailFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/planetDetailFragment"
         android:name="com.example.jocasta.ui.detail.PlanetDetailFragment"
@@ -78,6 +83,7 @@
             android:id="@+id/planetDetailToFilmDetail"
             app:destination="@id/filmDetailFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/filmDetailFragment"
         android:name="com.example.jocasta.ui.detail.FilmDetailFragment"
@@ -102,6 +108,7 @@
             android:id="@+id/filmDetailToSpeciesDetail"
             app:destination="@id/speciesDetailFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/speciesDetailFragment"
         android:name="com.example.jocasta.ui.detail.SpeciesDetailFragment"
@@ -116,7 +123,11 @@
         <action
             android:id="@+id/speciesDetailToFilmDetail"
             app:destination="@id/filmDetailFragment" />
+        <action
+            android:id="@+id/speciesDetailToPlanetDetail"
+            app:destination="@id/planetDetailFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/vehicleDetailFragment"
         android:name="com.example.jocasta.ui.detail.VehicleDetailFragment"
@@ -132,6 +143,7 @@
             android:id="@+id/vehicleDetailToPeopleDetail"
             app:destination="@id/peopleDetailFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/starshipDetailFragment"
         android:name="com.example.jocasta.ui.detail.StarshipDetailFragment"

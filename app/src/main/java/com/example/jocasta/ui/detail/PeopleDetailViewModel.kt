@@ -1,10 +1,7 @@
 package com.example.jocasta.ui.detail
 
 import androidx.lifecycle.*
-import com.example.jocasta.network.model.Film
-import com.example.jocasta.network.model.Species
-import com.example.jocasta.network.model.Starship
-import com.example.jocasta.network.model.Vehicle
+import com.example.jocasta.network.model.*
 import com.example.jocasta.repository.ResourceRepository
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -39,6 +36,10 @@ class PeopleDetailViewModel(private val repository: ResourceRepository) : ViewMo
     private val _starships = MutableLiveData<List<Starship>>()
     val starships: LiveData<List<Starship>>
         get() = _starships
+
+    private val _planets = MutableLiveData<List<Planet>>()
+    val planets: LiveData<List<Planet>>
+        get() = _planets
 
     fun getFilmDetails(filmURLs: List<String>) {
         viewModelScope.launch {
@@ -94,6 +95,21 @@ class PeopleDetailViewModel(private val repository: ResourceRepository) : ViewMo
                     retrievedLists.add(starShip)
                 }
                 _starships.value = retrievedLists
+            } catch (exception: Exception) {
+                Timber.d("some error occured : $exception")
+            }
+        }
+    }
+
+    fun getPlanet(planetUrls : List<String>){
+        viewModelScope.launch {
+            try {
+                val retrievedList = mutableListOf<Planet>()
+                planetUrls.forEach { planetUrl ->
+                    val planet = repository.getPlanetFor(planetUrl)
+                    retrievedList.add(planet)
+                }
+                _planets.value = retrievedList
             } catch (exception: Exception) {
                 Timber.d("some error occured : $exception")
             }

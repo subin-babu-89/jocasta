@@ -59,7 +59,7 @@ class PlanetDetailFragment : Fragment() {
         })
 
         binding.filmList.adapter = DetailsFilmsAdapter(DetailsFilmsAdapter.ResourceClickListener {
-            val action = PeopleDetailFragmentDirections.peopleDetailToFilmDetail(it)
+            val action = PlanetDetailFragmentDirections.planetDetailToFilmDetail(it)
             findNavController().navigate(action)
         })
 

@@ -5,6 +5,9 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
 
+/**
+ * Entity (table) for resource type
+ */
 @Parcelize
 @Entity(tableName = "resource_types")
 data class ResourceType(

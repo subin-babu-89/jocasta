@@ -6,6 +6,9 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.jocasta.db.entity.VehicleRemoteKeys
 
+/**
+ * Room DAO for remote keys for vehicle resource paging in the app
+ */
 @Dao
 interface VehicleRemoteKeysDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)

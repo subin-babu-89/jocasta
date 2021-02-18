@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -39,7 +38,8 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:swApiStatus="@{viewModel.status}" />
+            app:swApiStatus="@{viewModel.status}"
+            android:contentDescription="@string/status_image_for_network_response" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

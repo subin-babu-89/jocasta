@@ -22,6 +22,7 @@ class FilmRemoteMediator(
     private val service: SWApiService,
     private val database: JocastaDatabase
 ) : RemoteMediator<Int, Film>() {
+
     override suspend fun load(loadType: LoadType, state: PagingState<Int, Film>): MediatorResult {
         val page = when (loadType) {
             LoadType.REFRESH -> {

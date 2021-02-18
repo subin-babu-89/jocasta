@@ -22,6 +22,7 @@ class PlanetRemoteMediator(
     private val service: SWApiService,
     private val database: JocastaDatabase
 ) : RemoteMediator<Int, Planet>() {
+
     override suspend fun load(loadType: LoadType, state: PagingState<Int, Planet>): MediatorResult {
         val page = when (loadType) {
             LoadType.REFRESH -> {
