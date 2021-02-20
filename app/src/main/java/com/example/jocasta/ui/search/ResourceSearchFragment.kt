@@ -26,8 +26,10 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
+/**
+ * Fragment class for the search fragment for particular resource
+ */
 class ResourceSearchFragment : Fragment() {
 
     companion object {
@@ -54,18 +56,27 @@ class ResourceSearchFragment : Fragment() {
 
     private lateinit var resourceType: ResourceType
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        resourceType = ResourceSearchFragmentArgs.fromBundle(requireArguments()).resource
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
 
-        resourceType = ResourceSearchFragmentArgs.fromBundle(requireArguments()).resource
-
         binding = ResourceSearchFragmentBinding.inflate(inflater)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
+        initViews(savedInstanceState)
+
+        return binding.root
+    }
+
+    private fun initViews(savedInstanceState: Bundle?) {
         binding.resultsList.layoutManager = LinearLayoutManager(requireContext())
 
         initAdapter()
@@ -76,8 +87,6 @@ class ResourceSearchFragment : Fragment() {
         binding.retryButton.setOnClickListener {
             adapter.retry()
         }
-
-        return binding.root
     }
 
     private fun initAdapter() {
@@ -102,7 +111,7 @@ class ResourceSearchFragment : Fragment() {
             errorState?.let {
                 Toast.makeText(
                     requireContext(),
-                    "\uD83D\uDE28 Wooops ${it.error}",
+                    "Application Error : ${it.error}",
                     Toast.LENGTH_LONG
                 ).show()
             }
@@ -156,7 +165,6 @@ class ResourceSearchFragment : Fragment() {
         searchJob = lifecycleScope.launch {
             viewModel.search(resourceType.resourceName, query).collectLatest {
                 adapter.submitData(it)
-                Timber.d("Current count is ${adapter.itemCount}")
             }
         }
     }

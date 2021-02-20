@@ -13,6 +13,9 @@ import com.example.jocasta.network.model.*
 import com.example.jocasta.ui.search.ResourceSearchFragmentDirections
 import timber.log.Timber
 
+/**
+ * adapter for the recyclerview used to display list of resources on the search screen
+ */
 class ResourceSearchAdapter :
     PagingDataAdapter<AbstractResource, ResourceSearchAdapter.ResourceSearchViewHolder>(
         RESOURCE_COMPARATOR
@@ -25,7 +28,6 @@ class ResourceSearchAdapter :
     override fun onBindViewHolder(holder: ResourceSearchViewHolder, position: Int) {
         val resource = getItem(position)
         holder.itemView.setOnClickListener {
-            Timber.d("resource clicked $resource")
             when (resource) {
                 is People -> {
                     it.findNavController()

@@ -8,6 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.jocasta.databinding.SimpleClickableTextViewBinding
 import com.example.jocasta.network.model.People
 
+/**
+ * Adapter for the people list that appears on the details page for different resource types
+ */
 class DetailsPeopleAdapter(private val onClickListener: ResourceClickListener) :
     ListAdapter<People, DetailsPeopleAdapter.SimpleClickableTextViewHolder>(DETAILS_FILMS_COMPARATOR) {
     companion object {

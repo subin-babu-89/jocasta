@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.NonNull
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -15,6 +16,9 @@ import com.example.jocasta.repository.ResourceRepository
 import com.example.jocasta.ui.adapter.DetailsFilmsAdapter
 import com.example.jocasta.ui.adapter.DetailsPeopleAdapter
 
+/**
+ * Fragment class for the Planet detail view
+ */
 class PlanetDetailFragment : Fragment() {
 
     private val viewModel: PlanetDetailViewModel by lazy {
@@ -46,6 +50,13 @@ class PlanetDetailFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
+        bindAndObserveDetailsLists(binding)
+
+        return binding.root
+    }
+
+    private fun bindAndObserveDetailsLists(binding: FragmentPlanetDetailBinding) {
+        // <-----------People Recyclerview on the film details page
         binding.peopleList.adapter =
             DetailsPeopleAdapter(DetailsPeopleAdapter.ResourceClickListener {
                 val action = PlanetDetailFragmentDirections.planetDetailToPeopleDetail(it)
@@ -58,6 +69,7 @@ class PlanetDetailFragment : Fragment() {
             adapter.submitList(it)
         })
 
+        // <-----------Films Recyclerview on the film details page
         binding.filmList.adapter = DetailsFilmsAdapter(DetailsFilmsAdapter.ResourceClickListener {
             val action = PlanetDetailFragmentDirections.planetDetailToFilmDetail(it)
             findNavController().navigate(action)
@@ -68,7 +80,5 @@ class PlanetDetailFragment : Fragment() {
             adapter.submitList(null)
             adapter.submitList(it)
         })
-
-        return binding.root
     }
 }

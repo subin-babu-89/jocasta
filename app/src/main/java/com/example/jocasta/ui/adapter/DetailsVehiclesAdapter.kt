@@ -8,6 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.jocasta.databinding.SimpleClickableTextViewBinding
 import com.example.jocasta.network.model.Vehicle
 
+/**
+ * Adapter for the vehicle list that appears on the details page for different resource types
+ */
 class DetailsVehiclesAdapter(private val onClickListener: ResourceClickListener) :
     ListAdapter<Vehicle, DetailsVehiclesAdapter.SimpleClickableTextViewHolder>(
         DETAILS_FILMS_COMPARATOR

@@ -8,6 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.jocasta.databinding.SimpleClickableTextViewBinding
 import com.example.jocasta.network.model.Species
 
+/**
+ * Adapter for the species list that appears on the details page for different resource types
+ */
 class DetailsSpeciesAdapter(private val onClickListener: ResourceClickListener) :
     ListAdapter<Species, DetailsSpeciesAdapter.SimpleClickableTextViewHolder>(
         DETAILS_FILMS_COMPARATOR

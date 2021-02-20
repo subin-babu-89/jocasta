@@ -8,8 +8,10 @@ import timber.log.Timber
 
 enum class SWAPIStatus { LOADING, ERROR, DONE }
 
+/**
+ * Associated view model for the resources fragment
+ */
 class ResourcesViewModel(private val repository: ResourceListRepository) : ViewModel() {
-
     companion object {
         class ViewModelFactory(private val repository: ResourceListRepository) :
             ViewModelProvider.Factory {
@@ -31,10 +33,6 @@ class ResourcesViewModel(private val repository: ResourceListRepository) : ViewM
     val resources: LiveData<List<ResourceType>>
         get() = _resources
 
-    private val _navigateToSelectedResourceType = MutableLiveData<ResourceType?>()
-    val navigateToSelectedResourceType: MutableLiveData<ResourceType?>
-        get() = _navigateToSelectedResourceType
-
     init {
         getSWApiResources()
     }
@@ -45,7 +43,6 @@ class ResourcesViewModel(private val repository: ResourceListRepository) : ViewM
             try {
                 _resources.value = repository.getResourcesList()
                 _status.value = SWAPIStatus.DONE
-                Timber.d("ResourcesViewModel -> complete ${_resources.value}")
             } catch (ex: Exception) {
                 Timber.d("ResourcesViewModel -> error $ex")
                 _status.value = SWAPIStatus.ERROR
@@ -54,11 +51,4 @@ class ResourcesViewModel(private val repository: ResourceListRepository) : ViewM
         }
     }
 
-    fun displayResourceType(resourceType: ResourceType) {
-        _navigateToSelectedResourceType.value = resourceType
-    }
-
-    fun displayResourceTypeComplete() {
-        _navigateToSelectedResourceType.value = null
-    }
 }

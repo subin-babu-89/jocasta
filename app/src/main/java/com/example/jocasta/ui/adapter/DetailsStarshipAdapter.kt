@@ -8,6 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.jocasta.databinding.SimpleClickableTextViewBinding
 import com.example.jocasta.network.model.Starship
 
+/**
+ * Adapter for the starship list that appears on the details page for different resource types
+ */
 class DetailsStarshipAdapter(private val onClickListener: ResourceClickListener) :
     ListAdapter<Starship, DetailsStarshipAdapter.SimpleClickableTextViewHolder>(
         DETAILS_FILMS_COMPARATOR

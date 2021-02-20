@@ -10,6 +10,10 @@ import androidx.navigation.ui.NavigationUI
 import com.example.jocasta.R
 import com.example.jocasta.databinding.MainActivityBinding
 
+/**
+ * Main Activity for the application. Various Fragments are swapped in the NavHostFragmemt;
+ * based on the paths and directions defined in the navigation graph
+ */
 class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
@@ -24,7 +28,6 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
 
-        //my_nav_host defined in activity xml file as id of fragment or FragmentContainerView
         val appBarConfiguration = AppBarConfiguration(navController.graph)
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration)
     }

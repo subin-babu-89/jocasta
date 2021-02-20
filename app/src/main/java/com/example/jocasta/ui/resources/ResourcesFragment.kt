@@ -13,6 +13,9 @@ import com.example.jocasta.network.SWApiService
 import com.example.jocasta.repository.ResourceListRepository
 import com.example.jocasta.ui.adapter.ResourceTypeGridAdapter
 
+/**
+ * Fragment class for the resources list that is visible at the start of the app launch
+ */
 class ResourcesFragment : Fragment() {
 
     private val viewModel: ResourcesViewModel by lazy {
@@ -32,26 +35,13 @@ class ResourcesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val binding = ResourcesFragmentBinding.inflate(inflater)
-        //val binding = GridViewItemBinding.inflate(inflater)
-
-        // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
         binding.lifecycleOwner = viewLifecycleOwner
-
-        // Giving the binding access to the OverviewViewModel
         binding.viewModel = viewModel
 
-        // Sets the adapter of the photosGrid RecyclerView
         binding.resourceGrid.adapter =
             ResourceTypeGridAdapter(ResourceTypeGridAdapter.ResourceClickListener {
-                viewModel.displayResourceType(it)
-            })
-
-        viewModel.navigateToSelectedResourceType.observe(viewLifecycleOwner, {
-            if (null != it) {
                 this.findNavController().navigate(ResourcesFragmentDirections.navigateToSearch(it))
-                viewModel.displayResourceTypeComplete()
-            }
-        })
+            })
         return binding.root
     }
 

@@ -14,6 +14,9 @@ import com.example.jocasta.network.model.Film
 import com.example.jocasta.repository.ResourceRepository
 import com.example.jocasta.ui.adapter.*
 
+/**
+ * Fragment class for the film detail view
+ */
 class FilmDetailFragment : Fragment() {
 
     private val viewModel: FilmDetailViewModel by lazy {
@@ -45,6 +48,13 @@ class FilmDetailFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
+        bindAndObserveDetailsLists(binding)
+
+        return binding.root
+    }
+
+    private fun bindAndObserveDetailsLists(binding: FragmentFilmDetailBinding) {
+        // <-----------People Recyclerview on the film details page
         binding.peopleList.adapter =
             DetailsPeopleAdapter(DetailsPeopleAdapter.ResourceClickListener {
                 val action = FilmDetailFragmentDirections.filmDetailToPeopleDetail(it)
@@ -57,6 +67,7 @@ class FilmDetailFragment : Fragment() {
             adapter.submitList(it)
         })
 
+        // <-----------PlanetList Recyclerview on the film details page
         binding.planetList.adapter =
             DetailsPlanetAdapter(DetailsPlanetAdapter.ResourceClickListener {
                 val action = FilmDetailFragmentDirections.filmDetailToPlanetDetail(it)
@@ -69,6 +80,7 @@ class FilmDetailFragment : Fragment() {
             adapter.submitList(it)
         })
 
+        // <-----------Starships Recyclerview on the film details page
         binding.starshipList.adapter =
             DetailsStarshipAdapter(DetailsStarshipAdapter.ResourceClickListener {
                 val action = FilmDetailFragmentDirections.filmDetailToStarshipDetail(it)
@@ -81,6 +93,7 @@ class FilmDetailFragment : Fragment() {
             adapter.submitList(it)
         })
 
+        // <-----------Vehicles Recyclerview on the film details page
         binding.vehiclesList.adapter =
             DetailsVehiclesAdapter(DetailsVehiclesAdapter.ResourceClickListener {
                 val action = FilmDetailFragmentDirections.filmDetailToVehicleDetail(it)
@@ -93,6 +106,7 @@ class FilmDetailFragment : Fragment() {
             adapter.submitList(it)
         })
 
+        // <-----------Species Recyclerview on the film details page
         binding.speciesList.adapter =
             DetailsSpeciesAdapter(DetailsSpeciesAdapter.ResourceClickListener {
                 val action = FilmDetailFragmentDirections.filmDetailToSpeciesDetail(it)
@@ -104,7 +118,6 @@ class FilmDetailFragment : Fragment() {
             adapter.submitList(null)
             adapter.submitList(it)
         })
-        return binding.root
     }
 
 }

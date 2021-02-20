@@ -6,6 +6,9 @@ import com.example.jocasta.repository.ResourceRepository
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
+/**
+ * View Model class for the supporting fim details fragment
+ */
 class FilmDetailViewModel(private val repository: ResourceRepository) : ViewModel() {
     companion object {
         class ViewModelFactory(private val repository: ResourceRepository) :
@@ -40,6 +43,11 @@ class FilmDetailViewModel(private val repository: ResourceRepository) : ViewMode
     val species: LiveData<List<Species>>
         get() = _species
 
+    /**
+     * Get People Details from Repo
+     *
+     * @param peopleUrls List of string urls to fetch the information for
+     */
     fun getPeopleDetails(peopleUrls: List<String>) {
         viewModelScope.launch {
             try {
@@ -50,11 +58,16 @@ class FilmDetailViewModel(private val repository: ResourceRepository) : ViewMode
                 }
                 _people.value = retrievedLists
             } catch (exception: Exception) {
-                Timber.d("some error occured : $exception")
+                Timber.d("Exception occured : $exception")
             }
         }
     }
 
+    /**
+     * Get Planet Details from Repo
+     *
+     * @param planetUrls List of string urls to fetch the information for
+     */
     fun getPlanetDetails(planetUrls: List<String>) {
         viewModelScope.launch {
             try {
@@ -65,11 +78,16 @@ class FilmDetailViewModel(private val repository: ResourceRepository) : ViewMode
                 }
                 _planets.value = retrievedLists
             } catch (exception: Exception) {
-                Timber.d("some error occured : $exception")
+                Timber.d("Exception occured : $exception")
             }
         }
     }
 
+    /**
+     * Get Starship Details from Repo
+     *
+     * @param starshipUrls List of string urls to fetch the information for
+     */
     fun getStarshipDetails(starshipUrls: List<String>) {
         viewModelScope.launch {
             try {
@@ -80,11 +98,16 @@ class FilmDetailViewModel(private val repository: ResourceRepository) : ViewMode
                 }
                 _starships.value = retrievedLists
             } catch (exception: Exception) {
-                Timber.d("some error occured : $exception")
+                Timber.d("Exception occured : $exception")
             }
         }
     }
 
+    /**
+     * Get Vehicle Details from Repo
+     *
+     * @param vehicleUrls List of string urls to fetch the information for
+     */
     fun getVehicleDetails(vehicleUrls: List<String>) {
         viewModelScope.launch {
             try {
@@ -95,11 +118,16 @@ class FilmDetailViewModel(private val repository: ResourceRepository) : ViewMode
                 }
                 _vehicles.value = retrievedLists
             } catch (exception: Exception) {
-                Timber.d("some error occured : $exception")
+                Timber.d("Exception occured : $exception")
             }
         }
     }
 
+    /**
+     * Get Species Details from Repo
+     *
+     * @param speciesUrls List of string urls to fetch the information for
+     */
     fun getSpeciesDetails(speciesUrls: List<String>) {
         viewModelScope.launch {
             try {

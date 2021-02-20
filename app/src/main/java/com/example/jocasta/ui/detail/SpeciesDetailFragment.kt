@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.NonNull
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -16,6 +17,9 @@ import com.example.jocasta.ui.adapter.DetailsFilmsAdapter
 import com.example.jocasta.ui.adapter.DetailsPeopleAdapter
 import com.example.jocasta.ui.adapter.DetailsPlanetAdapter
 
+/**
+ * Fragment class for the film detail view
+ */
 class SpeciesDetailFragment : Fragment() {
 
     private val viewModel: SpeciesDetailViewModel by lazy {
@@ -48,6 +52,12 @@ class SpeciesDetailFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
+        bindAndObserveDetailsLists(binding)
+        return binding.root
+    }
+
+    private fun bindAndObserveDetailsLists(binding: FragmentSpeciesDetailBinding) {
+        // <-----------People Recyclerview on the film details page
         binding.peopleList.adapter =
             DetailsPeopleAdapter(DetailsPeopleAdapter.ResourceClickListener {
                 val action = SpeciesDetailFragmentDirections.speciesDetailToPeopleDetail(it)
@@ -60,6 +70,7 @@ class SpeciesDetailFragment : Fragment() {
             adapter.submitList(it)
         })
 
+        // <-----------Films Recyclerview on the film details page
         binding.filmsList.adapter = DetailsFilmsAdapter(DetailsFilmsAdapter.ResourceClickListener {
             val action = SpeciesDetailFragmentDirections.speciesDetailToFilmDetail(it)
             findNavController().navigate(action)
@@ -71,6 +82,7 @@ class SpeciesDetailFragment : Fragment() {
             adapter.submitList(it)
         })
 
+        // <-----------Planet Recyclerview on the film details page
         binding.homeWorld.adapter =
             DetailsPlanetAdapter(DetailsPlanetAdapter.ResourceClickListener {
                 val action = SpeciesDetailFragmentDirections.speciesDetailToPlanetDetail(it)
@@ -82,7 +94,6 @@ class SpeciesDetailFragment : Fragment() {
             adapter.submitList(null)
             adapter.submitList(it)
         })
-        return binding.root
     }
 
 }

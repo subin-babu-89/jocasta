@@ -20,7 +20,9 @@ import com.example.jocasta.databinding.ResourcesGridItemBinding
 import com.example.jocasta.db.entity.ResourceType
 import timber.log.Timber
 
-
+/**
+ * Adapter for the list of resources to be displayed on the initial launch screen of the app
+ */
 class ResourceTypeGridAdapter(private val onClickListener: ResourceClickListener) :
     ListAdapter<ResourceType, ResourceTypeGridAdapter.ResourceViewHolder>(
         RESOURCE_TYPE_DIFF_COMPARATOR
@@ -36,11 +38,6 @@ class ResourceTypeGridAdapter(private val onClickListener: ResourceClickListener
             onClickListener.onClick(resource)
         }
         holder.bind(resource)
-    }
-
-    override fun submitList(list: MutableList<ResourceType>?) {
-        super.submitList(list)
-        Timber.d("received data : $list")
     }
 
     class ResourceViewHolder(private var binding: ResourcesGridItemBinding) :

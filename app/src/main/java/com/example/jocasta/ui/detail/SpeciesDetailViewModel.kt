@@ -34,6 +34,11 @@ class SpeciesDetailViewModel(private val repository: ResourceRepository) : ViewM
     val planets: LiveData<List<Planet>>
         get() = _planets
 
+    /**
+     * Get People Details from Repo
+     *
+     * @param peopleUrls List of string urls to fetch the information for
+     */
     fun getPeopleDetails(peopleUrls: List<String>) {
         viewModelScope.launch {
             try {
@@ -44,11 +49,16 @@ class SpeciesDetailViewModel(private val repository: ResourceRepository) : ViewM
                 }
                 _people.value = retrievedLists
             } catch (exception: Exception) {
-                Timber.d("some error occured : $exception")
+                Timber.d("Exception occured : $exception")
             }
         }
     }
 
+    /**
+     * Get Film Details from Repo
+     *
+     * @param filmURLs List of string urls to fetch the information for
+     */
     fun getFilmDetails(filmURLs: List<String>) {
         viewModelScope.launch {
             try {
@@ -59,11 +69,16 @@ class SpeciesDetailViewModel(private val repository: ResourceRepository) : ViewM
                 }
                 _films.value = retrievedLists
             } catch (exception: Exception) {
-                Timber.d("some error occured : $exception")
+                Timber.d("Exception occured : $exception")
             }
         }
     }
 
+    /**
+     * Get Planet Details from Repo
+     *
+     * @param planetUrls List of string urls to fetch the information for
+     */
     fun getPlanet(planetUrls : List<String>){
         viewModelScope.launch {
             try {
@@ -74,7 +89,7 @@ class SpeciesDetailViewModel(private val repository: ResourceRepository) : ViewM
                 }
                 _planets.value = retrievedList
             } catch (exception: Exception) {
-                Timber.d("some error occured : $exception")
+                Timber.d("Exception occured : $exception")
             }
         }
     }

@@ -9,6 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.jocasta.R
 import com.example.jocasta.databinding.ResourceLoadStateFooterViewItemBinding
 
+/**
+ * Load state indicator that appears at the end of the paging recyclerview that appears on the search screen
+ */
 class ResourceLoadStateAdapter(private val retry: () -> Unit) :
     LoadStateAdapter<ResourceLoadStateAdapter.ResourceLoadStateViewHolder>() {
 

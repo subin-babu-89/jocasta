@@ -9,10 +9,11 @@ import com.example.jocasta.databinding.SimpleClickableTextViewBinding
 import com.example.jocasta.network.model.Film
 
 /**
- *
+ * Adapter for the films list that appears on the details page for different resource types
  */
 class DetailsFilmsAdapter(private val onClickListener: ResourceClickListener) :
     ListAdapter<Film, DetailsFilmsAdapter.SimpleClickableTextViewHolder>(DETAILS_FILMS_COMPARATOR) {
+
     companion object {
         private val DETAILS_FILMS_COMPARATOR = object : DiffUtil.ItemCallback<Film>() {
             override fun areItemsTheSame(oldItem: Film, newItem: Film): Boolean {

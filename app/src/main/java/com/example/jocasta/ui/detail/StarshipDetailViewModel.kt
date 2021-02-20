@@ -29,6 +29,11 @@ class StarshipDetailViewModel(private val repository: ResourceRepository) : View
     val films: LiveData<List<Film>>
         get() = _films
 
+    /**
+     * Get People Details from Repo
+     *
+     * @param peopleUrls List of string urls to fetch the information for
+     */
     fun getPeopleDetails(peopleUrls: List<String>) {
         viewModelScope.launch {
             try {
@@ -39,11 +44,16 @@ class StarshipDetailViewModel(private val repository: ResourceRepository) : View
                 }
                 _people.value = retrievedLists
             } catch (exception: Exception) {
-                Timber.d("some error occured : $exception")
+                Timber.d("Exception occured : $exception")
             }
         }
     }
 
+    /**
+     * Get Film Details from Repo
+     *
+     * @param filmURLs List of string urls to fetch the information for
+     */
     fun getFilmDetails(filmURLs: List<String>) {
         viewModelScope.launch {
             try {
@@ -54,7 +64,7 @@ class StarshipDetailViewModel(private val repository: ResourceRepository) : View
                 }
                 _films.value = retrievedLists
             } catch (exception: Exception) {
-                Timber.d("some error occured : $exception")
+                Timber.d("Exception occured : $exception")
             }
         }
     }

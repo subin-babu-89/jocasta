@@ -228,23 +228,31 @@ fun bindResourceTypeFetchStatus(statusImageView: ImageView, status: SWAPIStatus?
 }
 
 @BindingAdapter(value = ["listPlanetOnPeople", "vM"], requireAll = true)
-fun bindPlanetOnPersonDetails(recyclerView: RecyclerView, data: String?, viewModel: PeopleDetailViewModel){
+fun bindPlanetOnPersonDetails(
+    recyclerView: RecyclerView,
+    data: String?,
+    viewModel: PeopleDetailViewModel
+) {
     val adapter = recyclerView.adapter as DetailsPlanetAdapter
     adapter.submitList(listOf(Planet(title = "Loading", name = "Loading")))
-    if (data == null){
+    if (data == null) {
         adapter.submitList(listOf(Planet(title = "N/A", name = "N/A")))
-    }else{
+    } else {
         viewModel.getPlanet(listOf(data))
     }
 }
 
 @BindingAdapter(value = ["listPlanetOnSpecies", "vM"], requireAll = true)
-fun bindPlanetOnSpeciesDetails(recyclerView: RecyclerView, data: String?, viewModel: SpeciesDetailViewModel){
+fun bindPlanetOnSpeciesDetails(
+    recyclerView: RecyclerView,
+    data: String?,
+    viewModel: SpeciesDetailViewModel
+) {
     val adapter = recyclerView.adapter as DetailsPlanetAdapter
     adapter.submitList(listOf(Planet(title = "Loading", name = "Loading")))
-    if (data == null){
+    if (data == null) {
         adapter.submitList(listOf(Planet(title = "N/A", name = "N/A")))
-    }else{
+    } else {
         viewModel.getPlanet(listOf(data))
     }
 }

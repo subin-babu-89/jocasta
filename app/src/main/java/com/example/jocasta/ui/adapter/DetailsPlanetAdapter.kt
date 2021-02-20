@@ -8,6 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.jocasta.databinding.SimpleClickableTextViewBinding
 import com.example.jocasta.network.model.Planet
 
+/**
+ * Adapter for the planets list that appears on the details page for different resource types
+ */
 class DetailsPlanetAdapter(private val onClickListener: ResourceClickListener) :
     ListAdapter<Planet, DetailsPlanetAdapter.SimpleClickableTextViewHolder>(DETAILS_FILMS_COMPARATOR) {
     companion object {

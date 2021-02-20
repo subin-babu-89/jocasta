@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.NonNull
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -15,6 +16,9 @@ import com.example.jocasta.repository.ResourceRepository
 import com.example.jocasta.ui.adapter.DetailsFilmsAdapter
 import com.example.jocasta.ui.adapter.DetailsPeopleAdapter
 
+/**
+ * Fragment class for the vehicle detail view
+ */
 class VehicleDetailFragment : Fragment() {
 
     private val viewModel: VehicleDetailViewModel by lazy {
@@ -46,6 +50,13 @@ class VehicleDetailFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
+        bindAndObserveDetailsLists(binding)
+
+        return binding.root
+    }
+
+    private fun bindAndObserveDetailsLists(binding: FragmentVehicleDetailBinding) {
+        // <-----------People Recyclerview on the film details page
         binding.pilotList.adapter =
             DetailsPeopleAdapter(DetailsPeopleAdapter.ResourceClickListener {
                 val action = VehicleDetailFragmentDirections.vehicleDetailToPeopleDetail(it)
@@ -58,6 +69,7 @@ class VehicleDetailFragment : Fragment() {
             adapter.submitList(it)
         })
 
+        // <-----------Films Recyclerview on the film details page
         binding.filmList.adapter = DetailsFilmsAdapter(DetailsFilmsAdapter.ResourceClickListener {
             val action = VehicleDetailFragmentDirections.vehicleDetailToFilmDetail(it)
             findNavController().navigate(action)
@@ -68,8 +80,6 @@ class VehicleDetailFragment : Fragment() {
             adapter.submitList(null)
             adapter.submitList(it)
         })
-
-        return binding.root
     }
 
 }
